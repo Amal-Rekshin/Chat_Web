@@ -18,4 +18,7 @@ public class ChatMessagePayload {
     private LocalDateTime createdAt;
     private String senderName;
     private Boolean isEdited;
+    private Long replyToMessageId;
+    private String replyToMessageContent;
+    private String replyToSenderName;
 }

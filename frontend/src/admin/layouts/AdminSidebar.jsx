@@ -1,23 +1,27 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { LayoutDashboard, Users, MessageSquare, ShieldAlert, Settings, Building2, Megaphone } from 'lucide-react';
+import { LayoutDashboard, Users, MessageSquare, ShieldAlert, Settings, Building2, Megaphone, X } from 'lucide-react';
 
-const AdminSidebar = () => {
+const AdminSidebar = ({ onClose }) => {
   const navItems = [
     { name: 'Dashboard', path: '/admin', icon: LayoutDashboard },
     { name: 'User Management', path: '/admin/users', icon: Users },
-    { name: 'Departments', path: '/admin/departments', icon: Building2 },
     { name: 'Groups', path: '/admin/groups', icon: MessageSquare },
     { name: 'Announcements', path: '/admin/announcements', icon: Megaphone },
   ];
 
   return (
     <div className="w-64 bg-slate-900 border-r border-slate-800 flex flex-col h-full flex-shrink-0">
-      <div className="p-6 border-b border-slate-800">
+      <div className="p-6 border-b border-slate-800 flex justify-between items-center">
         <h1 className="text-xl font-bold text-white flex items-center space-x-2">
           <ShieldAlert className="text-indigo-500" />
           <span>Admin Portal</span>
         </h1>
+        {onClose && (
+          <button onClick={onClose} className="md:hidden text-slate-400 hover:text-white transition-colors">
+            <X size={20} />
+          </button>
+        )}
       </div>
       
       <div className="flex-1 overflow-y-auto py-4">

@@ -3,9 +3,22 @@ const MessageBubble = ({
   message,
   isOwn,
   status = 'SENT',
-  onEditRequest
+  onEditRequest,
+  onReplyRequest
 }) => {
   const [isHovered, setIsHovered] = React.useState(false);
+  
+  // Helper to parse tags
+  const renderTextWithTags = (text) => {
+    if (!text) return null;
+    const parts = text.split(/(@\w+)/g);
+    return parts.map((part, i) => {
+      if (part.startsWith('@')) {
+        return <span key={i} className="text-indigo-400 font-bold bg-indigo-500/10 px-1 rounded">{part}</span>;
+      }
+      return part;
+    });
+  };
   const content = message.content || '';
   const time = message.createdAt ? new Date(message.createdAt).toLocaleTimeString([], {
     hour: '2-digit',
@@ -20,11 +33,12 @@ const MessageBubble = ({
              {(message.sender?.username?.[0] || message.senderName?.[0] || 'U').toUpperCase()}
           </div>}
         
-        <div className={`relative px-4 py-2.5 rounded-2xl shadow-sm group ${isOwn ? 'bg-indigo-600 text-white rounded-br-sm' : 'bg-slate-800 text-slate-100 rounded-bl-sm border border-slate-700'}`}>
-          {isHovered && isEditable && onEditRequest && (
-            <button onClick={() => onEditRequest(message)} className="absolute -top-3 -left-3 bg-slate-800 p-1.5 rounded-full shadow-lg border border-slate-600 text-slate-300 hover:text-white hover:bg-indigo-500 transition-colors z-10 hidden group-hover:flex">
-              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/><path d="m15 5 4 4"/></svg>
-            </button>
+        <div className={`relative px-4 py-2.5 rounded-2xl shadow-sm ${isOwn ? 'bg-indigo-600 text-white rounded-br-sm' : 'bg-slate-800 text-slate-100 rounded-bl-sm border border-slate-700'}`}>
+          {message.replyToMessageContent && (
+            <div className={`mb-2 p-2 rounded border-l-2 text-xs truncate max-w-[200px] sm:max-w-xs ${isOwn ? 'bg-indigo-500/20 border-indigo-300 text-indigo-100' : 'bg-slate-700 border-slate-400 text-slate-300'}`}>
+              <span className="font-semibold block mb-0.5">{message.replyToSenderName || 'Someone'}</span>
+              {message.replyToMessageContent}
+            </div>
           )}
           {message.messageType === 'IMAGE' && message.fileUrl ? (
             <div className="mb-1">
@@ -39,7 +53,7 @@ const MessageBubble = ({
             </div>
           ) : null}
           {content && message.messageType !== 'FILE' && (
-            <p className="text-sm leading-relaxed whitespace-pre-wrap break-words">{content}</p>
+            <p className="text-sm leading-relaxed whitespace-pre-wrap break-words">{renderTextWithTags(content)}</p>
           )}
           <div className={`text-[10px] mt-1 flex items-center justify-end ${isOwn ? 'text-indigo-200' : 'text-slate-500'}`}>
             <span>{time}</span>
@@ -61,6 +75,21 @@ const MessageBubble = ({
             )}
           </div>
         </div>
+        
+        {isHovered && (
+          <div className="flex flex-row gap-1 items-center pb-2 shrink-0">
+            {isEditable && onEditRequest && (
+              <button onClick={() => onEditRequest(message)} className="bg-slate-800 p-1.5 rounded-full shadow-sm border border-slate-600 text-slate-300 hover:text-white hover:bg-indigo-500 transition-colors" title="Edit">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/><path d="m15 5 4 4"/></svg>
+              </button>
+            )}
+            {onReplyRequest && (
+              <button onClick={() => onReplyRequest(message)} className="bg-slate-800 p-1.5 rounded-full shadow-sm border border-slate-600 text-slate-300 hover:text-white hover:bg-indigo-500 transition-colors" title="Reply">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M9 14 4 9l5-5"/><path d="M4 9h10.5a5.5 5.5 0 0 1 5.5 5.5v.5"/></svg>
+              </button>
+            )}
+          </div>
+        )}
       </div>
     </div>;
 };

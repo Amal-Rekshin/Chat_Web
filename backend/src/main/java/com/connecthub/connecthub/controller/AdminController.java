@@ -2,7 +2,6 @@ package com.connecthub.connecthub.controller;
 
 import com.connecthub.connecthub.dto.AdminDashboardDTO;
 import com.connecthub.connecthub.entity.User;
-import com.connecthub.connecthub.entity.Role;
 import com.connecthub.connecthub.entity.UserStatus;
 import com.connecthub.connecthub.repository.ChatRepository;
 import com.connecthub.connecthub.repository.MessageRepository;
@@ -25,7 +24,6 @@ public class AdminController {
     private final UserRepository userRepository;
     private final ChatRepository chatRepository;
     private final MessageRepository messageRepository;
-    private final com.connecthub.connecthub.repository.DepartmentRepository departmentRepository;
     private final com.connecthub.connecthub.repository.ChatMemberRepository chatMemberRepository;
     private final RoleRepository roleRepository;
     private final UserStatusRepository userStatusRepository;
@@ -36,24 +34,11 @@ public class AdminController {
         return org.springframework.security.core.context.SecurityContextHolder.getContext().getAuthentication().getName();
     }
 
+    private final com.connecthub.connecthub.service.AdminStatsService adminStatsService;
+
     @GetMapping("/dashboard")
     public ResponseEntity<AdminDashboardDTO> getDashboardStats() {
-        long totalUsers = userRepository.count();
-        long activeGroups = chatRepository.countByType("GROUP");
-        long totalMessages = messageRepository.count();
-
-        long onlineUsers = userRepository.findAll().stream()
-                .filter(u -> "ONLINE".equals(u.getStatus().getName()))
-                .count();
-
-        AdminDashboardDTO stats = AdminDashboardDTO.builder()
-                .totalUsers(totalUsers)
-                .activeGroups(activeGroups)
-                .totalMessages(totalMessages)
-                .onlineUsers(onlineUsers)
-                .build();
-
-        return ResponseEntity.ok(stats);
+        return ResponseEntity.ok(adminStatsService.getDashboardStats());
     }
 
     @GetMapping("/users")
@@ -75,11 +60,10 @@ public class AdminController {
     public static class AdminUserRequestDTO {
         public String username;
         public String email;
-        public Role role;
+        public String role;
         public String status;
         public String password;
         public List<Long> groupIds;
-        public com.connecthub.connecthub.entity.Department department;
     }
 
     @GetMapping("/users/{id}/groups")
@@ -104,12 +88,12 @@ public class AdminController {
         user.setUsername(requestDto.username);
         user.setFullName(requestDto.username);
         user.setEmail(requestDto.email);
-        user.setRole(requestDto.role);
+        String roleName = requestDto.role != null ? requestDto.role : "USER";
+        user.setRole(roleRepository.findByName(roleName).orElseThrow());
         
         String statusName = requestDto.status != null ? requestDto.status : "OFFLINE";
         user.setStatus(userStatusRepository.findByName(statusName).orElseThrow());
         
-        user.setDepartment(requestDto.department);
         
         String rawPassword = requestDto.password != null && !requestDto.password.isEmpty() ? requestDto.password : "adminpass";
         user.setPassword(passwordEncoder.encode(rawPassword)); 
@@ -131,13 +115,10 @@ public class AdminController {
             user.setFullName(requestDto.username);
             user.setEmail(requestDto.email);
             if (requestDto.role != null) {
-                user.setRole(requestDto.role);
+                user.setRole(roleRepository.findByName(requestDto.role).orElseThrow());
             }
             if (requestDto.status != null) {
                 user.setStatus(userStatusRepository.findByName(requestDto.status).orElseThrow());
-            }
-            if (requestDto.department != null) {
-                user.setDepartment(requestDto.department);
             }
             if (requestDto.password != null && !requestDto.password.isEmpty()) {
                 user.setPassword(passwordEncoder.encode(requestDto.password));
@@ -186,55 +167,29 @@ public class AdminController {
         }
     }
 
-    // --- Department Endpoints ---
-
-    @GetMapping("/departments")
-    public ResponseEntity<List<com.connecthub.connecthub.entity.Department>> getAllDepartments() {
-        return ResponseEntity.ok(departmentRepository.findAll());
-    }
-
-    @PostMapping("/departments")
-    public ResponseEntity<?> createDepartment(@RequestBody com.connecthub.connecthub.entity.Department department, jakarta.servlet.http.HttpServletRequest request) {
-        if (departmentRepository.existsByName(department.getName())) {
-            return ResponseEntity.badRequest().body("Department name already exists");
-        }
-        com.connecthub.connecthub.entity.Department saved = departmentRepository.save(department);
-        auditService.logAction(getCurrentUsername(), "CREATE_DEPARTMENT", "Created department: " + saved.getName(), request.getRemoteAddr());
-        return ResponseEntity.ok(saved);
-    }
-
-    @PutMapping("/departments/{id}")
-    public ResponseEntity<?> updateDepartment(@PathVariable Long id, @RequestBody com.connecthub.connecthub.entity.Department departmentRequest, jakarta.servlet.http.HttpServletRequest request) {
-        return departmentRepository.findById(id).map(dept -> {
-            dept.setName(departmentRequest.getName());
-            dept.setDescription(departmentRequest.getDescription());
-            com.connecthub.connecthub.entity.Department updated = departmentRepository.save(dept);
-            auditService.logAction(getCurrentUsername(), "UPDATE_DEPARTMENT", "Updated department: " + updated.getName(), request.getRemoteAddr());
-            return ResponseEntity.ok(updated);
-        }).orElse(ResponseEntity.notFound().build());
-    }
-
-    @DeleteMapping("/departments/{id}")
-    public ResponseEntity<?> deleteDepartment(@PathVariable Long id, jakarta.servlet.http.HttpServletRequest request) {
-        return departmentRepository.findById(id).map(dept -> {
-            // Nullify department for users in this department
-            List<User> usersInDept = userRepository.findAll().stream()
-                    .filter(u -> u.getDepartment() != null && u.getDepartment().getId().equals(id))
-                    .toList();
-            for (User u : usersInDept) {
-                u.setDepartment(null);
-                userRepository.save(u);
-            }
-            departmentRepository.delete(dept);
-            auditService.logAction(getCurrentUsername(), "DELETE_DEPARTMENT", "Deleted department: " + dept.getName(), request.getRemoteAddr());
-            return ResponseEntity.ok().build();
-        }).orElse(ResponseEntity.notFound().build());
-    }
 
     // --- Group Endpoints ---
     @GetMapping("/groups")
-    public ResponseEntity<List<com.connecthub.connecthub.entity.Chat>> getAllGroups() {
-        return ResponseEntity.ok(chatRepository.findByType("GROUP"));
+    public ResponseEntity<?> getAllGroups() {
+        List<com.connecthub.connecthub.entity.Chat> groups = chatRepository.findByType("GROUP");
+        List<java.util.Map<String, Object>> response = new java.util.ArrayList<>();
+        for (com.connecthub.connecthub.entity.Chat chat : groups) {
+            java.util.Map<String, Object> map = new java.util.HashMap<>();
+            map.put("id", chat.getId());
+            map.put("name", chat.getName());
+            map.put("description", chat.getImageUrl() != null ? chat.getImageUrl() : ""); // Use image field as description if needed, or leave empty
+            
+            List<com.connecthub.connecthub.entity.ChatMember> members = chatMemberRepository.findByChatId(chat.getId());
+            List<java.util.Map<String, Object>> memberList = new java.util.ArrayList<>();
+            for (com.connecthub.connecthub.entity.ChatMember cm : members) {
+                java.util.Map<String, Object> m = new java.util.HashMap<>();
+                m.put("userId", cm.getUser().getId());
+                memberList.add(m);
+            }
+            map.put("members", memberList);
+            response.add(map);
+        }
+        return ResponseEntity.ok(response);
     }
 
     @DeleteMapping("/groups/{id}")

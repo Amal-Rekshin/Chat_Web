@@ -4,15 +4,6 @@ import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContai
 import api from '../../services/api';
 import { useWebSocket } from '../../context/WebSocketContext';
 
-const mockChartData = [
-  { name: 'Mon', users: 400, messages: 2400 },
-  { name: 'Tue', users: 300, messages: 1398 },
-  { name: 'Wed', users: 200, messages: 9800 },
-  { name: 'Thu', users: 278, messages: 3908 },
-  { name: 'Fri', users: 189, messages: 4800 },
-  { name: 'Sat', users: 239, messages: 3800 },
-  { name: 'Sun', users: 349, messages: 4300 },
-];
 
 const StatCard = ({ title, value, icon: Icon, colorClass }) => (
   <div className="bg-slate-900 border border-slate-800 rounded-xl p-6 shadow-sm">
@@ -104,10 +95,10 @@ const AdminDashboard = () => {
 
       {/* Analytics Chart */}
       <div className="bg-slate-900 border border-slate-800 rounded-xl p-6 shadow-sm mt-8">
-        <h2 className="text-lg font-semibold text-white mb-6">Activity Trends (Mock Data)</h2>
+        <h2 className="text-lg font-semibold text-white mb-6">Activity Trends (Last 7 Days)</h2>
         <div className="h-80 w-full">
           <ResponsiveContainer width="100%" height="100%">
-            <AreaChart data={mockChartData} margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
+            <AreaChart data={stats.activityTrends || []} margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
               <defs>
                 <linearGradient id="colorMessages" x1="0" y1="0" x2="0" y2="1">
                   <stop offset="5%" stopColor="#6366f1" stopOpacity={0.8}/>

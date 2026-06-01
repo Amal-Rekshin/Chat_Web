@@ -13,7 +13,7 @@ public class ChatInfoMemberDTO {
     private Long userId;
     private String username;
     private String email;
-    private String profileImage;
+
     private String role;
     private String status;
 }

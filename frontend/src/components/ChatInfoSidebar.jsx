@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { X, User, Users, Mail, Clock, Info, UserPlus } from 'lucide-react';
 import api from '../services/api';
+import { formatImageUrl } from '../utils/imageUtils';
 
 const ChatInfoSidebar = ({ chat, currentUserId, onClose, onAddMember, onlineUsers = {} }) => {
   const [info, setInfo] = useState(null);
@@ -85,7 +86,7 @@ const ChatInfoSidebar = ({ chat, currentUserId, onClose, onAddMember, onlineUser
         <div className="w-24 h-24 rounded-full bg-slate-700 border border-slate-600 flex items-center justify-center font-bold text-3xl text-white overflow-hidden mb-4 shadow-lg">
           {info.image ? (
             <>
-              <img src={info.image} className="w-full h-full object-cover" alt={info.name} onError={(e) => { e.target.style.display='none'; e.target.nextSibling.style.display='flex'; }} />
+              <img src={formatImageUrl(info.image)} className="w-full h-full object-cover" alt={info.name} onError={(e) => { e.target.style.display='none'; e.target.nextSibling.style.display='flex'; }} />
               <div style={{display: 'none'}} className="w-full h-full items-center justify-center">
                 {info.name?.[0]?.toUpperCase() || (info.type === 'GROUP' ? <Users size={40} /> : <User size={40} />)}
               </div>
@@ -154,11 +155,7 @@ const ChatInfoSidebar = ({ chat, currentUserId, onClose, onAddMember, onlineUser
                 {info.members?.map(member => (
                   <div key={member.userId} className="flex items-center space-x-3 group relative">
                     <div className="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center font-bold text-slate-300 shrink-0">
-                      {member.profileImage ? (
-                        <img src={member.profileImage} className="w-full h-full rounded-full object-cover" alt="" />
-                      ) : (
-                        member.username?.[0]?.toUpperCase()
-                      )}
+                      {member.username?.[0]?.toUpperCase()}
                     </div>
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center justify-between">

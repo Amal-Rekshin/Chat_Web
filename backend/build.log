@@ -1,0 +1,616 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ---------------------< com.connecthub:connecthub >----------------------
+[INFO] Building ConnectHub 0.0.1-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- clean:3.5.0:clean (default-clean) @ connecthub ---
+[INFO] Deleting /Users/antonyamalrekshingmail.com/Desktop/chat web/backend/target
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ connecthub ---
+[INFO] Copying 1 resource from src/main/resources to target/classes
+[INFO] Copying 1 resource from src/main/resources to target/classes
+[INFO] 
+[INFO] --- compiler:3.14.1:compile (default-compile) @ connecthub ---
+[INFO] Recompiling the module because of changed source code.
+[INFO] Compiling 53 source files with javac [debug parameters release 17] to target/classes
+[INFO] -------------------------------------------------------------
+[ERROR] COMPILATION ERROR : 
+[INFO] -------------------------------------------------------------
+[ERROR] /Users/antonyamalrekshingmail.com/Desktop/chat web/backend/src/main/java/com/connecthub/connecthub/service/ChatService.java:[332,17] method markChatAsRead(java.lang.Long,java.lang.Long) is already defined in class com.connecthub.connecthub.service.ChatService
+[ERROR] /Users/antonyamalrekshingmail.com/Desktop/chat web/backend/src/main/java/com/connecthub/connecthub/service/ChatService.java:[347,17] method markChatAsDelivered(java.lang.Long,java.lang.Long) is already defined in class com.connecthub.connecthub.service.ChatService
+[ERROR] /Users/antonyamalrekshingmail.com/Desktop/chat web/backend/src/main/java/com/connecthub/connecthub/service/ChatService.java:[360,44] method getMemberStatuses(java.lang.Long) is already defined in class com.connecthub.connecthub.service.ChatService
+[ERROR] /Users/antonyamalrekshingmail.com/Desktop/chat web/backend/src/main/java/com/connecthub/connecthub/security/UserDetailsServiceImpl.java:[26,21] cannot find symbol
+  symbol:   method getUsername()
+  location: variable user of type com.connecthub.connecthub.entity.User
+[ERROR] /Users/antonyamalrekshingmail.com/Desktop/chat web/backend/src/main/java/com/connecthub/connecthub/security/UserDetailsServiceImpl.java:[27,21] cannot find symbol
+  symbol:   method getPassword()
+  location: variable user of type com.connecthub.connecthub.entity.User
+[ERROR] /Users/antonyamalrekshingmail.com/Desktop/chat web/backend/src/main/java/com/connecthub/connecthub/security/UserDetailsServiceImpl.java:[28,80] cannot find symbol
+  symbol:   method getRole()
+  location: variable user of type com.connecthub.connecthub.entity.User
+[ERROR] /Users/antonyamalrekshingmail.com/Desktop/chat web/backend/src/main/java/com/connecthub/connecthub/controller/AdminController.java:[53,17] cannot find symbol
+  symbol:   method setStatus(com.connecthub.connecthub.entity.UserStatus)
+  location: variable user of type com.connecthub.connecthub.entity.User
+[ERROR] /Users/antonyamalrekshingmail.com/Desktop/chat web/backend/src/main/java/com/connecthub/connecthub/controller/AdminController.java:[55,98] cannot find symbol
+  symbol:   method getUsername()
+  location: variable user of type com.connecthub.connecthub.entity.User
+[ERROR] /Users/antonyamalrekshingmail.com/Desktop/chat web/backend/src/main/java/com/connecthub/connecthub/controller/AdminController.java:[72,48] cannot find symbol
+  symbol:   method getChat()
+  location: variable cm of type com.connecthub.connecthub.entity.ChatMember
+[ERROR] /Users/antonyamalrekshingmail.com/Desktop/chat web/backend/src/main/java/com/connecthub/connecthub/controller/AdminController.java:[73,30] cannot find symbol
+  symbol:   method getChat()
+  location: variable cm of type com.connecthub.connecthub.entity.ChatMember
+[ERROR] /Users/antonyamalrekshingmail.com/Desktop/chat web/backend/src/main/java/com/connecthub/connecthub/controller/AdminController.java:[74,24] incompatible types: java.util.List<java.lang.Object> cannot be converted to java.util.List<java.lang.Long>
+[ERROR] /Users/antonyamalrekshingmail.com/Desktop/chat web/backend/src/main/java/com/connecthub/connecthub/controller/AdminController.java:[88,13] cannot find symbol
+  symbol:   method setUsername(java.lang.String)
+  location: variable user of type com.connecthub.connecthub.entity.User
+[ERROR] /Users/antonyamalrekshingmail.com/Desktop/chat web/backend/src/main/java/com/connecthub/connecthub/controller/AdminController.java:[89,13] cannot find symbol
+  symbol:   method setFullName(java.lang.String)
+  location: variable user of type com.connecthub.connecthub.entity.User
+[ERROR] /Users/antonyamalrekshingmail.com/Desktop/chat web/backend/src/main/java/com/connecthub/connecthub/controller/AdminController.java:[90,13] cannot find symbol
+  symbol:   method setEmail(java.lang.String)
+  location: variable user of type com.connecthub.connecthub.entity.User
+[ERROR] /Users/antonyamalrekshingmail.com/Desktop/chat web/backend/src/main/java/com/connecthub/connecthub/controller/AdminController.java:[92,13] cannot find symbol
+  symbol:   method setRole(com.connecthub.connecthub.entity.Role)
+  location: variable user of type com.connecthub.connecthub.entity.User
+[ERROR] /Users/antonyamalrekshingmail.com/Desktop/chat web/backend/src/main/java/com/connecthub/connecthub/controller/AdminController.java:[95,13] cannot find symbol
+  symbol:   method setStatus(com.connecthub.connecthub.entity.UserStatus)
+  location: variable user of type com.connecthub.connecthub.entity.User
+[ERROR] /Users/antonyamalrekshingmail.com/Desktop/chat web/backend/src/main/java/com/connecthub/connecthub/controller/AdminController.java:[99,13] cannot find symbol
+  symbol:   method setPassword(java.lang.String)
+  location: variable user of type com.connecthub.connecthub.entity.User
+[ERROR] /Users/antonyamalrekshingmail.com/Desktop/chat web/backend/src/main/java/com/connecthub/connecthub/controller/AdminController.java:[107,97] cannot find symbol
+  symbol:   method getUsername()
+  location: variable savedUser of type com.connecthub.connecthub.entity.User
+[ERROR] /Users/antonyamalrekshingmail.com/Desktop/chat web/backend/src/main/java/com/connecthub/connecthub/controller/AdminController.java:[114,17] cannot find symbol
+  symbol:   method setUsername(java.lang.String)
+  location: variable user of type com.connecthub.connecthub.entity.User
+[ERROR] /Users/antonyamalrekshingmail.com/Desktop/chat web/backend/src/main/java/com/connecthub/connecthub/controller/AdminController.java:[115,17] cannot find symbol
+  symbol:   method setFullName(java.lang.String)
+  location: variable user of type com.connecthub.connecthub.entity.User
+[ERROR] /Users/antonyamalrekshingmail.com/Desktop/chat web/backend/src/main/java/com/connecthub/connecthub/controller/AdminController.java:[116,17] cannot find symbol
+  symbol:   method setEmail(java.lang.String)
+  location: variable user of type com.connecthub.connecthub.entity.User
+[ERROR] /Users/antonyamalrekshingmail.com/Desktop/chat web/backend/src/main/java/com/connecthub/connecthub/controller/AdminController.java:[118,21] cannot find symbol
+  symbol:   method setRole(com.connecthub.connecthub.entity.Role)
+  location: variable user of type com.connecthub.connecthub.entity.User
+[ERROR] /Users/antonyamalrekshingmail.com/Desktop/chat web/backend/src/main/java/com/connecthub/connecthub/controller/AdminController.java:[121,21] cannot find symbol
+  symbol:   method setStatus(com.connecthub.connecthub.entity.UserStatus)
+  location: variable user of type com.connecthub.connecthub.entity.User
+[ERROR] /Users/antonyamalrekshingmail.com/Desktop/chat web/backend/src/main/java/com/connecthub/connecthub/controller/AdminController.java:[124,21] cannot find symbol
+  symbol:   method setPassword(java.lang.String)
+  location: variable user of type com.connecthub.connecthub.entity.User
+[ERROR] /Users/antonyamalrekshingmail.com/Desktop/chat web/backend/src/main/java/com/connecthub/connecthub/controller/AdminController.java:[132,103] cannot find symbol
+  symbol:   method getUsername()
+  location: variable updatedUser of type com.connecthub.connecthub.entity.User
+[ERROR] /Users/antonyamalrekshingmail.com/Desktop/chat web/backend/src/main/java/com/connecthub/connecthub/controller/AdminController.java:[138,119] cannot find symbol
+  symbol:   method getId()
+  location: variable user of type com.connecthub.connecthub.entity.User
+[ERROR] /Users/antonyamalrekshingmail.com/Desktop/chat web/backend/src/main/java/com/connecthub/connecthub/controller/AdminController.java:[143,26] cannot find symbol
+  symbol:   method getChat()
+  location: variable cm of type com.connecthub.connecthub.entity.ChatMember
+[ERROR] /Users/antonyamalrekshingmail.com/Desktop/chat web/backend/src/main/java/com/connecthub/connecthub/controller/AdminController.java:[144,20] incompatible types: java.util.List<java.lang.Object> cannot be converted to java.util.List<java.lang.Long>
+[ERROR] /Users/antonyamalrekshingmail.com/Desktop/chat web/backend/src/main/java/com/connecthub/connecthub/controller/AdminController.java:[148,38] cannot find symbol
+  symbol:   method getChat()
+  location: variable cm of type com.connecthub.connecthub.entity.ChatMember
+[ERROR] /Users/antonyamalrekshingmail.com/Desktop/chat web/backend/src/main/java/com/connecthub/connecthub/controller/AdminController.java:[157,44] cannot find symbol
+  symbol:   method getChatType()
+  location: variable chat of type com.connecthub.connecthub.entity.Chat
+[ERROR] /Users/antonyamalrekshingmail.com/Desktop/chat web/backend/src/main/java/com/connecthub/connecthub/controller/AdminController.java:[158,124] cannot find symbol
+  symbol:   method builder()
+  location: class com.connecthub.connecthub.entity.ChatMember
+[ERROR] /Users/antonyamalrekshingmail.com/Desktop/chat web/backend/src/main/java/com/connecthub/connecthub/controller/AdminController.java:[180,37] cannot find symbol
+  symbol:   method getChatType()
+  location: variable chat of type com.connecthub.connecthub.entity.Chat
+[ERROR] /Users/antonyamalrekshingmail.com/Desktop/chat web/backend/src/main/java/com/connecthub/connecthub/controller/AdminController.java:[184,98] cannot find symbol
+  symbol:   method getName()
+  location: variable chat of type com.connecthub.connecthub.entity.Chat
+[ERROR] /Users/antonyamalrekshingmail.com/Desktop/chat web/backend/src/main/java/com/connecthub/connecthub/controller/AdminController.java:[194,37] cannot find symbol
+  symbol:   method getChatType()
+  location: variable chat of type com.connecthub.connecthub.entity.Chat
+[ERROR] /Users/antonyamalrekshingmail.com/Desktop/chat web/backend/src/main/java/com/connecthub/connecthub/controller/AdminController.java:[198,49] cannot find symbol
+  symbol:   method getUser()
+  location: variable cm of type com.connecthub.connecthub.entity.ChatMember
+[ERROR] /Users/antonyamalrekshingmail.com/Desktop/chat web/backend/src/main/java/com/connecthub/connecthub/controller/AdminController.java:[198,71] cannot find symbol
+  symbol:   method getUser()
+  location: variable cm of type com.connecthub.connecthub.entity.ChatMember
+[ERROR] /Users/antonyamalrekshingmail.com/Desktop/chat web/backend/src/main/java/com/connecthub/connecthub/controller/AdminController.java:[198,99] cannot find symbol
+  symbol:   method getUser()
+  location: variable cm of type com.connecthub.connecthub.entity.ChatMember
+[ERROR] /Users/antonyamalrekshingmail.com/Desktop/chat web/backend/src/main/java/com/connecthub/connecthub/controller/AdminController.java:[198,124] cannot find symbol
+  symbol:   method getIsAdmin()
+  location: variable cm of type com.connecthub.connecthub.entity.ChatMember
+[ERROR] /Users/antonyamalrekshingmail.com/Desktop/chat web/backend/src/main/java/com/connecthub/connecthub/controller/AdminController.java:[207,37] cannot find symbol
+  symbol:   method getChatType()
+  location: variable chat of type com.connecthub.connecthub.entity.Chat
+[ERROR] /Users/antonyamalrekshingmail.com/Desktop/chat web/backend/src/main/java/com/connecthub/connecthub/controller/AdminController.java:[213,15] cannot find symbol
+  symbol:   method setIsAdmin(boolean)
+  location: variable cm of type com.connecthub.connecthub.entity.ChatMember
+[ERROR] /Users/antonyamalrekshingmail.com/Desktop/chat web/backend/src/main/java/com/connecthub/connecthub/controller/AdminController.java:[216,106] cannot find symbol
+  symbol:   method getUser()
+  location: variable cm of type com.connecthub.connecthub.entity.ChatMember
+[ERROR] /Users/antonyamalrekshingmail.com/Desktop/chat web/backend/src/main/java/com/connecthub/connecthub/controller/AdminController.java:[216,183] cannot find symbol
+  symbol:   method getName()
+  location: variable chat of type com.connecthub.connecthub.entity.Chat
+[ERROR] /Users/antonyamalrekshingmail.com/Desktop/chat web/backend/src/main/java/com/connecthub/connecthub/controller/AdminController.java:[224,37] cannot find symbol
+  symbol:   method getChatType()
+  location: variable chat of type com.connecthub.connecthub.entity.Chat
+[ERROR] /Users/antonyamalrekshingmail.com/Desktop/chat web/backend/src/main/java/com/connecthub/connecthub/controller/AdminController.java:[232,101] cannot find symbol
+  symbol:   method getUser()
+  location: variable cm of type com.connecthub.connecthub.entity.ChatMember
+[ERROR] /Users/antonyamalrekshingmail.com/Desktop/chat web/backend/src/main/java/com/connecthub/connecthub/controller/AdminController.java:[232,149] cannot find symbol
+  symbol:   method getName()
+  location: variable chat of type com.connecthub.connecthub.entity.Chat
+[ERROR] /Users/antonyamalrekshingmail.com/Desktop/chat web/backend/src/main/java/com/connecthub/connecthub/service/AuditService.java:[20,36] cannot find symbol
+  symbol:   method builder()
+  location: class com.connecthub.connecthub.entity.AuditLog
+[ERROR] /Users/antonyamalrekshingmail.com/Desktop/chat web/backend/src/main/java/com/connecthub/connecthub/service/AdminStatsService.java:[27,31] cannot find symbol
+  symbol:   method getStatus()
+  location: variable u of type com.connecthub.connecthub.entity.User
+[ERROR] /Users/antonyamalrekshingmail.com/Desktop/chat web/backend/src/main/java/com/connecthub/connecthub/service/AdminStatsService.java:[27,72] cannot find symbol
+  symbol:   method getStatus()
+  location: variable u of type com.connecthub.connecthub.entity.User
+[ERROR] /Users/antonyamalrekshingmail.com/Desktop/chat web/backend/src/main/java/com/connecthub/connecthub/service/AdminStatsService.java:[41,62] cannot find symbol
+  symbol:   method builder()
+  location: class com.connecthub.connecthub.dto.AdminDashboardDTO.TrendData
+[ERROR] /Users/antonyamalrekshingmail.com/Desktop/chat web/backend/src/main/java/com/connecthub/connecthub/service/AdminStatsService.java:[48,42] cannot find symbol
+  symbol:   method setMessages(long)
+  location: class com.connecthub.connecthub.dto.AdminDashboardDTO.TrendData
+[ERROR] /Users/antonyamalrekshingmail.com/Desktop/chat web/backend/src/main/java/com/connecthub/connecthub/service/AdminStatsService.java:[57,42] cannot find symbol
+  symbol:   method setUsers(long)
+  location: class com.connecthub.connecthub.dto.AdminDashboardDTO.TrendData
+[ERROR] /Users/antonyamalrekshingmail.com/Desktop/chat web/backend/src/main/java/com/connecthub/connecthub/service/AdminStatsService.java:[62,33] cannot find symbol
+  symbol:   method builder()
+  location: class com.connecthub.connecthub.dto.AdminDashboardDTO
+[ERROR] /Users/antonyamalrekshingmail.com/Desktop/chat web/backend/src/main/java/com/connecthub/connecthub/controller/AnnouncementController.java:[49,48] cannot find symbol
+  symbol:   method getId()
+  location: variable a of type com.connecthub.connecthub.entity.Announcement
+[ERROR] /Users/antonyamalrekshingmail.com/Desktop/chat web/backend/src/main/java/com/connecthub/connecthub/controller/AnnouncementController.java:[49,59] cannot find symbol
+  symbol:   method getTitle()
+  location: variable a of type com.connecthub.connecthub.entity.Announcement
+[ERROR] /Users/antonyamalrekshingmail.com/Desktop/chat web/backend/src/main/java/com/connecthub/connecthub/controller/AnnouncementController.java:[49,73] cannot find symbol
+  symbol:   method getContent()
+  location: variable a of type com.connecthub.connecthub.entity.Announcement
+[ERROR] /Users/antonyamalrekshingmail.com/Desktop/chat web/backend/src/main/java/com/connecthub/connecthub/controller/AnnouncementController.java:[49,89] cannot find symbol
+  symbol:   method getCreatedBy()
+  location: variable a of type com.connecthub.connecthub.entity.Announcement
+[ERROR] /Users/antonyamalrekshingmail.com/Desktop/chat web/backend/src/main/java/com/connecthub/connecthub/controller/AnnouncementController.java:[49,121] cannot find symbol
+  symbol:   method getCreatedAt()
+  location: variable a of type com.connecthub.connecthub.entity.Announcement
+[ERROR] /Users/antonyamalrekshingmail.com/Desktop/chat web/backend/src/main/java/com/connecthub/connecthub/controller/AnnouncementController.java:[60,49] cannot find symbol
+  symbol:   method builder()
+  location: class com.connecthub.connecthub.entity.Announcement
+[ERROR] /Users/antonyamalrekshingmail.com/Desktop/chat web/backend/src/main/java/com/connecthub/connecthub/controller/AnnouncementController.java:[68,97] cannot find symbol
+  symbol:   method getTitle()
+  location: variable saved of type com.connecthub.connecthub.entity.Announcement
+[ERROR] /Users/antonyamalrekshingmail.com/Desktop/chat web/backend/src/main/java/com/connecthub/connecthub/controller/AnnouncementController.java:[70,56] cannot find symbol
+  symbol:   method getId()
+  location: variable saved of type com.connecthub.connecthub.entity.Announcement
+[ERROR] /Users/antonyamalrekshingmail.com/Desktop/chat web/backend/src/main/java/com/connecthub/connecthub/controller/AnnouncementController.java:[70,71] cannot find symbol
+  symbol:   method getTitle()
+  location: variable saved of type com.connecthub.connecthub.entity.Announcement
+[ERROR] /Users/antonyamalrekshingmail.com/Desktop/chat web/backend/src/main/java/com/connecthub/connecthub/controller/AnnouncementController.java:[70,89] cannot find symbol
+  symbol:   method getContent()
+  location: variable saved of type com.connecthub.connecthub.entity.Announcement
+[ERROR] /Users/antonyamalrekshingmail.com/Desktop/chat web/backend/src/main/java/com/connecthub/connecthub/controller/AnnouncementController.java:[70,109] cannot find symbol
+  symbol:   method getCreatedBy()
+  location: variable saved of type com.connecthub.connecthub.entity.Announcement
+[ERROR] /Users/antonyamalrekshingmail.com/Desktop/chat web/backend/src/main/java/com/connecthub/connecthub/controller/AnnouncementController.java:[70,145] cannot find symbol
+  symbol:   method getCreatedAt()
+  location: variable saved of type com.connecthub.connecthub.entity.Announcement
+[ERROR] /Users/antonyamalrekshingmail.com/Desktop/chat web/backend/src/main/java/com/connecthub/connecthub/controller/AnnouncementController.java:[84,41] cannot find symbol
+  symbol:   method getTitle()
+  location: variable saved of type com.connecthub.connecthub.entity.Announcement
+[ERROR] /Users/antonyamalrekshingmail.com/Desktop/chat web/backend/src/main/java/com/connecthub/connecthub/controller/AnnouncementController.java:[84,71] cannot find symbol
+  symbol:   method getContent()
+  location: variable saved of type com.connecthub.connecthub.entity.Announcement
+[ERROR] /Users/antonyamalrekshingmail.com/Desktop/chat web/backend/src/main/java/com/connecthub/connecthub/controller/AnnouncementController.java:[81,38] cannot find symbol
+  symbol:   method builder()
+  location: class com.connecthub.connecthub.entity.Message
+[ERROR] /Users/antonyamalrekshingmail.com/Desktop/chat web/backend/src/main/java/com/connecthub/connecthub/controller/AnnouncementController.java:[97,22] cannot find symbol
+  symbol:   method getUsername()
+  location: variable admin of type com.connecthub.connecthub.entity.User
+[ERROR] /Users/antonyamalrekshingmail.com/Desktop/chat web/backend/src/main/java/com/connecthub/connecthub/controller/AnnouncementController.java:[96,24] cannot find symbol
+  symbol:   method getCreatedAt()
+  location: variable message of type com.connecthub.connecthub.entity.Message
+[ERROR] /Users/antonyamalrekshingmail.com/Desktop/chat web/backend/src/main/java/com/connecthub/connecthub/controller/AnnouncementController.java:[93,24] cannot find symbol
+  symbol:   method getContent()
+  location: variable message of type com.connecthub.connecthub.entity.Message
+[ERROR] /Users/antonyamalrekshingmail.com/Desktop/chat web/backend/src/main/java/com/connecthub/connecthub/controller/AnnouncementController.java:[92,22] cannot find symbol
+  symbol:   method getId()
+  location: variable admin of type com.connecthub.connecthub.entity.User
+[ERROR] /Users/antonyamalrekshingmail.com/Desktop/chat web/backend/src/main/java/com/connecthub/connecthub/controller/AnnouncementController.java:[91,24] cannot find symbol
+  symbol:   method getId()
+  location: variable annChat of type com.connecthub.connecthub.entity.Chat
+[ERROR] /Users/antonyamalrekshingmail.com/Desktop/chat web/backend/src/main/java/com/connecthub/connecthub/controller/AnnouncementController.java:[90,24] cannot find symbol
+  symbol:   method getId()
+  location: variable message of type com.connecthub.connecthub.entity.Message
+[ERROR] /Users/antonyamalrekshingmail.com/Desktop/chat web/backend/src/main/java/com/connecthub/connecthub/controller/AnnouncementController.java:[103,70] cannot find symbol
+  symbol:   method getId()
+  location: variable annChat of type com.connecthub.connecthub.entity.Chat
+[ERROR] /Users/antonyamalrekshingmail.com/Desktop/chat web/backend/src/main/java/com/connecthub/connecthub/controller/AnnouncementController.java:[114,111] cannot find symbol
+  symbol:   method getTitle()
+  location: variable ann of type com.connecthub.connecthub.entity.Announcement
+[ERROR] /Users/antonyamalrekshingmail.com/Desktop/chat web/backend/src/main/java/com/connecthub/connecthub/controller/AuditController.java:[29,28] cannot find symbol
+  symbol:   method getId()
+  location: variable log of type com.connecthub.connecthub.entity.AuditLog
+[ERROR] /Users/antonyamalrekshingmail.com/Desktop/chat web/backend/src/main/java/com/connecthub/connecthub/controller/AuditController.java:[30,28] cannot find symbol
+  symbol:   method getAdmin()
+  location: variable log of type com.connecthub.connecthub.entity.AuditLog
+[ERROR] /Users/antonyamalrekshingmail.com/Desktop/chat web/backend/src/main/java/com/connecthub/connecthub/controller/AuditController.java:[31,28] cannot find symbol
+  symbol:   method getAction()
+  location: variable log of type com.connecthub.connecthub.entity.AuditLog
+[ERROR] /Users/antonyamalrekshingmail.com/Desktop/chat web/backend/src/main/java/com/connecthub/connecthub/controller/AuditController.java:[32,28] cannot find symbol
+  symbol:   method getDetails()
+  location: variable log of type com.connecthub.connecthub.entity.AuditLog
+[ERROR] /Users/antonyamalrekshingmail.com/Desktop/chat web/backend/src/main/java/com/connecthub/connecthub/controller/AuditController.java:[33,28] cannot find symbol
+  symbol:   method getIpAddress()
+  location: variable log of type com.connecthub.connecthub.entity.AuditLog
+[ERROR] /Users/antonyamalrekshingmail.com/Desktop/chat web/backend/src/main/java/com/connecthub/connecthub/controller/AuditController.java:[34,28] cannot find symbol
+  symbol:   method getCreatedAt()
+  location: variable log of type com.connecthub.connecthub.entity.AuditLog
+[ERROR] /Users/antonyamalrekshingmail.com/Desktop/chat web/backend/src/main/java/com/connecthub/connecthub/controller/AuthController.java:[36,68] cannot find symbol
+  symbol:   method getUsername()
+  location: variable authRequest of type com.connecthub.connecthub.dto.AuthRequest
+[ERROR] /Users/antonyamalrekshingmail.com/Desktop/chat web/backend/src/main/java/com/connecthub/connecthub/controller/AuthController.java:[36,95] cannot find symbol
+  symbol:   method getPassword()
+  location: variable authRequest of type com.connecthub.connecthub.dto.AuthRequest
+[ERROR] /Users/antonyamalrekshingmail.com/Desktop/chat web/backend/src/main/java/com/connecthub/connecthub/controller/AuthController.java:[39,62] cannot find symbol
+  symbol:   method getUsername()
+  location: variable authRequest of type com.connecthub.connecthub.dto.AuthRequest
+[ERROR] /Users/antonyamalrekshingmail.com/Desktop/chat web/backend/src/main/java/com/connecthub/connecthub/controller/AuthController.java:[42,50] cannot find symbol
+  symbol:   method getUsername()
+  location: variable user of type com.connecthub.connecthub.entity.User
+[ERROR] /Users/antonyamalrekshingmail.com/Desktop/chat web/backend/src/main/java/com/connecthub/connecthub/controller/AuthController.java:[43,113] cannot find symbol
+  symbol:   method getRole()
+  location: variable user of type com.connecthub.connecthub.entity.User
+[ERROR] /Users/antonyamalrekshingmail.com/Desktop/chat web/backend/src/main/java/com/connecthub/connecthub/controller/AuthController.java:[43,96] cannot find symbol
+  symbol:   method getEmail()
+  location: variable user of type com.connecthub.connecthub.entity.User
+[ERROR] /Users/antonyamalrekshingmail.com/Desktop/chat web/backend/src/main/java/com/connecthub/connecthub/controller/AuthController.java:[43,76] cannot find symbol
+  symbol:   method getUsername()
+  location: variable user of type com.connecthub.connecthub.entity.User
+[ERROR] /Users/antonyamalrekshingmail.com/Desktop/chat web/backend/src/main/java/com/connecthub/connecthub/controller/AuthController.java:[43,62] cannot find symbol
+  symbol:   method getId()
+  location: variable user of type com.connecthub.connecthub.entity.User
+[ERROR] /Users/antonyamalrekshingmail.com/Desktop/chat web/backend/src/main/java/com/connecthub/connecthub/controller/AuthController.java:[48,52] cannot find symbol
+  symbol:   method getUsername()
+  location: variable request of type com.connecthub.connecthub.dto.RegisterRequest
+[ERROR] /Users/antonyamalrekshingmail.com/Desktop/chat web/backend/src/main/java/com/connecthub/connecthub/controller/AuthController.java:[51,49] cannot find symbol
+  symbol:   method getEmail()
+  location: variable request of type com.connecthub.connecthub.dto.RegisterRequest
+[ERROR] /Users/antonyamalrekshingmail.com/Desktop/chat web/backend/src/main/java/com/connecthub/connecthub/controller/AuthController.java:[58,25] cannot find symbol
+  symbol:   method builder()
+  location: class com.connecthub.connecthub.entity.User
+[ERROR] /Users/antonyamalrekshingmail.com/Desktop/chat web/backend/src/main/java/com/connecthub/connecthub/controller/AuthController.java:[59,34] cannot find symbol
+  symbol:   method getUsername()
+  location: variable request of type com.connecthub.connecthub.dto.RegisterRequest
+[ERROR] /Users/antonyamalrekshingmail.com/Desktop/chat web/backend/src/main/java/com/connecthub/connecthub/controller/AuthController.java:[60,34] cannot find symbol
+  symbol:   method getUsername()
+  location: variable request of type com.connecthub.connecthub.dto.RegisterRequest
+[ERROR] /Users/antonyamalrekshingmail.com/Desktop/chat web/backend/src/main/java/com/connecthub/connecthub/controller/AuthController.java:[61,31] cannot find symbol
+  symbol:   method getEmail()
+  location: variable request of type com.connecthub.connecthub.dto.RegisterRequest
+[ERROR] /Users/antonyamalrekshingmail.com/Desktop/chat web/backend/src/main/java/com/connecthub/connecthub/controller/AuthController.java:[62,57] cannot find symbol
+  symbol:   method getPassword()
+  location: variable request of type com.connecthub.connecthub.dto.RegisterRequest
+[ERROR] /Users/antonyamalrekshingmail.com/Desktop/chat web/backend/src/main/java/com/connecthub/connecthub/controller/ChatController.java:[40,18] cannot find symbol
+  symbol:   method getAttachments()
+  location: variable m of type com.connecthub.connecthub.entity.Message
+[ERROR] /Users/antonyamalrekshingmail.com/Desktop/chat web/backend/src/main/java/com/connecthub/connecthub/controller/ChatController.java:[40,49] cannot find symbol
+  symbol:   method getAttachments()
+  location: variable m of type com.connecthub.connecthub.entity.Message
+[ERROR] /Users/antonyamalrekshingmail.com/Desktop/chat web/backend/src/main/java/com/connecthub/connecthub/controller/ChatController.java:[41,28] cannot find symbol
+  symbol:   method getAttachments()
+  location: variable m of type com.connecthub.connecthub.entity.Message
+[ERROR] /Users/antonyamalrekshingmail.com/Desktop/chat web/backend/src/main/java/com/connecthub/connecthub/controller/ChatController.java:[55,18] cannot find symbol
+  symbol:   method getReplyToMessage()
+  location: variable m of type com.connecthub.connecthub.entity.Message
+[INFO] 100 errors 
+[INFO] -------------------------------------------------------------
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  0.956 s
+[INFO] Finished at: 2026-05-29T14:56:29+05:30
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.14.1:compile (default-compile) on project connecthub: Compilation failure: Compilation failure: 
+[ERROR] /Users/antonyamalrekshingmail.com/Desktop/chat web/backend/src/main/java/com/connecthub/connecthub/service/ChatService.java:[332,17] method markChatAsRead(java.lang.Long,java.lang.Long) is already defined in class com.connecthub.connecthub.service.ChatService
+[ERROR] /Users/antonyamalrekshingmail.com/Desktop/chat web/backend/src/main/java/com/connecthub/connecthub/service/ChatService.java:[347,17] method markChatAsDelivered(java.lang.Long,java.lang.Long) is already defined in class com.connecthub.connecthub.service.ChatService
+[ERROR] /Users/antonyamalrekshingmail.com/Desktop/chat web/backend/src/main/java/com/connecthub/connecthub/service/ChatService.java:[360,44] method getMemberStatuses(java.lang.Long) is already defined in class com.connecthub.connecthub.service.ChatService
+[ERROR] /Users/antonyamalrekshingmail.com/Desktop/chat web/backend/src/main/java/com/connecthub/connecthub/security/UserDetailsServiceImpl.java:[26,21] cannot find symbol
+[ERROR]   symbol:   method getUsername()
+[ERROR]   location: variable user of type com.connecthub.connecthub.entity.User
+[ERROR] /Users/antonyamalrekshingmail.com/Desktop/chat web/backend/src/main/java/com/connecthub/connecthub/security/UserDetailsServiceImpl.java:[27,21] cannot find symbol
+[ERROR]   symbol:   method getPassword()
+[ERROR]   location: variable user of type com.connecthub.connecthub.entity.User
+[ERROR] /Users/antonyamalrekshingmail.com/Desktop/chat web/backend/src/main/java/com/connecthub/connecthub/security/UserDetailsServiceImpl.java:[28,80] cannot find symbol
+[ERROR]   symbol:   method getRole()
+[ERROR]   location: variable user of type com.connecthub.connecthub.entity.User
+[ERROR] /Users/antonyamalrekshingmail.com/Desktop/chat web/backend/src/main/java/com/connecthub/connecthub/controller/AdminController.java:[53,17] cannot find symbol
+[ERROR]   symbol:   method setStatus(com.connecthub.connecthub.entity.UserStatus)
+[ERROR]   location: variable user of type com.connecthub.connecthub.entity.User
+[ERROR] /Users/antonyamalrekshingmail.com/Desktop/chat web/backend/src/main/java/com/connecthub/connecthub/controller/AdminController.java:[55,98] cannot find symbol
+[ERROR]   symbol:   method getUsername()
+[ERROR]   location: variable user of type com.connecthub.connecthub.entity.User
+[ERROR] /Users/antonyamalrekshingmail.com/Desktop/chat web/backend/src/main/java/com/connecthub/connecthub/controller/AdminController.java:[72,48] cannot find symbol
+[ERROR]   symbol:   method getChat()
+[ERROR]   location: variable cm of type com.connecthub.connecthub.entity.ChatMember
+[ERROR] /Users/antonyamalrekshingmail.com/Desktop/chat web/backend/src/main/java/com/connecthub/connecthub/controller/AdminController.java:[73,30] cannot find symbol
+[ERROR]   symbol:   method getChat()
+[ERROR]   location: variable cm of type com.connecthub.connecthub.entity.ChatMember
+[ERROR] /Users/antonyamalrekshingmail.com/Desktop/chat web/backend/src/main/java/com/connecthub/connecthub/controller/AdminController.java:[74,24] incompatible types: java.util.List<java.lang.Object> cannot be converted to java.util.List<java.lang.Long>
+[ERROR] /Users/antonyamalrekshingmail.com/Desktop/chat web/backend/src/main/java/com/connecthub/connecthub/controller/AdminController.java:[88,13] cannot find symbol
+[ERROR]   symbol:   method setUsername(java.lang.String)
+[ERROR]   location: variable user of type com.connecthub.connecthub.entity.User
+[ERROR] /Users/antonyamalrekshingmail.com/Desktop/chat web/backend/src/main/java/com/connecthub/connecthub/controller/AdminController.java:[89,13] cannot find symbol
+[ERROR]   symbol:   method setFullName(java.lang.String)
+[ERROR]   location: variable user of type com.connecthub.connecthub.entity.User
+[ERROR] /Users/antonyamalrekshingmail.com/Desktop/chat web/backend/src/main/java/com/connecthub/connecthub/controller/AdminController.java:[90,13] cannot find symbol
+[ERROR]   symbol:   method setEmail(java.lang.String)
+[ERROR]   location: variable user of type com.connecthub.connecthub.entity.User
+[ERROR] /Users/antonyamalrekshingmail.com/Desktop/chat web/backend/src/main/java/com/connecthub/connecthub/controller/AdminController.java:[92,13] cannot find symbol
+[ERROR]   symbol:   method setRole(com.connecthub.connecthub.entity.Role)
+[ERROR]   location: variable user of type com.connecthub.connecthub.entity.User
+[ERROR] /Users/antonyamalrekshingmail.com/Desktop/chat web/backend/src/main/java/com/connecthub/connecthub/controller/AdminController.java:[95,13] cannot find symbol
+[ERROR]   symbol:   method setStatus(com.connecthub.connecthub.entity.UserStatus)
+[ERROR]   location: variable user of type com.connecthub.connecthub.entity.User
+[ERROR] /Users/antonyamalrekshingmail.com/Desktop/chat web/backend/src/main/java/com/connecthub/connecthub/controller/AdminController.java:[99,13] cannot find symbol
+[ERROR]   symbol:   method setPassword(java.lang.String)
+[ERROR]   location: variable user of type com.connecthub.connecthub.entity.User
+[ERROR] /Users/antonyamalrekshingmail.com/Desktop/chat web/backend/src/main/java/com/connecthub/connecthub/controller/AdminController.java:[107,97] cannot find symbol
+[ERROR]   symbol:   method getUsername()
+[ERROR]   location: variable savedUser of type com.connecthub.connecthub.entity.User
+[ERROR] /Users/antonyamalrekshingmail.com/Desktop/chat web/backend/src/main/java/com/connecthub/connecthub/controller/AdminController.java:[114,17] cannot find symbol
+[ERROR]   symbol:   method setUsername(java.lang.String)
+[ERROR]   location: variable user of type com.connecthub.connecthub.entity.User
+[ERROR] /Users/antonyamalrekshingmail.com/Desktop/chat web/backend/src/main/java/com/connecthub/connecthub/controller/AdminController.java:[115,17] cannot find symbol
+[ERROR]   symbol:   method setFullName(java.lang.String)
+[ERROR]   location: variable user of type com.connecthub.connecthub.entity.User
+[ERROR] /Users/antonyamalrekshingmail.com/Desktop/chat web/backend/src/main/java/com/connecthub/connecthub/controller/AdminController.java:[116,17] cannot find symbol
+[ERROR]   symbol:   method setEmail(java.lang.String)
+[ERROR]   location: variable user of type com.connecthub.connecthub.entity.User
+[ERROR] /Users/antonyamalrekshingmail.com/Desktop/chat web/backend/src/main/java/com/connecthub/connecthub/controller/AdminController.java:[118,21] cannot find symbol
+[ERROR]   symbol:   method setRole(com.connecthub.connecthub.entity.Role)
+[ERROR]   location: variable user of type com.connecthub.connecthub.entity.User
+[ERROR] /Users/antonyamalrekshingmail.com/Desktop/chat web/backend/src/main/java/com/connecthub/connecthub/controller/AdminController.java:[121,21] cannot find symbol
+[ERROR]   symbol:   method setStatus(com.connecthub.connecthub.entity.UserStatus)
+[ERROR]   location: variable user of type com.connecthub.connecthub.entity.User
+[ERROR] /Users/antonyamalrekshingmail.com/Desktop/chat web/backend/src/main/java/com/connecthub/connecthub/controller/AdminController.java:[124,21] cannot find symbol
+[ERROR]   symbol:   method setPassword(java.lang.String)
+[ERROR]   location: variable user of type com.connecthub.connecthub.entity.User
+[ERROR] /Users/antonyamalrekshingmail.com/Desktop/chat web/backend/src/main/java/com/connecthub/connecthub/controller/AdminController.java:[132,103] cannot find symbol
+[ERROR]   symbol:   method getUsername()
+[ERROR]   location: variable updatedUser of type com.connecthub.connecthub.entity.User
+[ERROR] /Users/antonyamalrekshingmail.com/Desktop/chat web/backend/src/main/java/com/connecthub/connecthub/controller/AdminController.java:[138,119] cannot find symbol
+[ERROR]   symbol:   method getId()
+[ERROR]   location: variable user of type com.connecthub.connecthub.entity.User
+[ERROR] /Users/antonyamalrekshingmail.com/Desktop/chat web/backend/src/main/java/com/connecthub/connecthub/controller/AdminController.java:[143,26] cannot find symbol
+[ERROR]   symbol:   method getChat()
+[ERROR]   location: variable cm of type com.connecthub.connecthub.entity.ChatMember
+[ERROR] /Users/antonyamalrekshingmail.com/Desktop/chat web/backend/src/main/java/com/connecthub/connecthub/controller/AdminController.java:[144,20] incompatible types: java.util.List<java.lang.Object> cannot be converted to java.util.List<java.lang.Long>
+[ERROR] /Users/antonyamalrekshingmail.com/Desktop/chat web/backend/src/main/java/com/connecthub/connecthub/controller/AdminController.java:[148,38] cannot find symbol
+[ERROR]   symbol:   method getChat()
+[ERROR]   location: variable cm of type com.connecthub.connecthub.entity.ChatMember
+[ERROR] /Users/antonyamalrekshingmail.com/Desktop/chat web/backend/src/main/java/com/connecthub/connecthub/controller/AdminController.java:[157,44] cannot find symbol
+[ERROR]   symbol:   method getChatType()
+[ERROR]   location: variable chat of type com.connecthub.connecthub.entity.Chat
+[ERROR] /Users/antonyamalrekshingmail.com/Desktop/chat web/backend/src/main/java/com/connecthub/connecthub/controller/AdminController.java:[158,124] cannot find symbol
+[ERROR]   symbol:   method builder()
+[ERROR]   location: class com.connecthub.connecthub.entity.ChatMember
+[ERROR] /Users/antonyamalrekshingmail.com/Desktop/chat web/backend/src/main/java/com/connecthub/connecthub/controller/AdminController.java:[180,37] cannot find symbol
+[ERROR]   symbol:   method getChatType()
+[ERROR]   location: variable chat of type com.connecthub.connecthub.entity.Chat
+[ERROR] /Users/antonyamalrekshingmail.com/Desktop/chat web/backend/src/main/java/com/connecthub/connecthub/controller/AdminController.java:[184,98] cannot find symbol
+[ERROR]   symbol:   method getName()
+[ERROR]   location: variable chat of type com.connecthub.connecthub.entity.Chat
+[ERROR] /Users/antonyamalrekshingmail.com/Desktop/chat web/backend/src/main/java/com/connecthub/connecthub/controller/AdminController.java:[194,37] cannot find symbol
+[ERROR]   symbol:   method getChatType()
+[ERROR]   location: variable chat of type com.connecthub.connecthub.entity.Chat
+[ERROR] /Users/antonyamalrekshingmail.com/Desktop/chat web/backend/src/main/java/com/connecthub/connecthub/controller/AdminController.java:[198,49] cannot find symbol
+[ERROR]   symbol:   method getUser()
+[ERROR]   location: variable cm of type com.connecthub.connecthub.entity.ChatMember
+[ERROR] /Users/antonyamalrekshingmail.com/Desktop/chat web/backend/src/main/java/com/connecthub/connecthub/controller/AdminController.java:[198,71] cannot find symbol
+[ERROR]   symbol:   method getUser()
+[ERROR]   location: variable cm of type com.connecthub.connecthub.entity.ChatMember
+[ERROR] /Users/antonyamalrekshingmail.com/Desktop/chat web/backend/src/main/java/com/connecthub/connecthub/controller/AdminController.java:[198,99] cannot find symbol
+[ERROR]   symbol:   method getUser()
+[ERROR]   location: variable cm of type com.connecthub.connecthub.entity.ChatMember
+[ERROR] /Users/antonyamalrekshingmail.com/Desktop/chat web/backend/src/main/java/com/connecthub/connecthub/controller/AdminController.java:[198,124] cannot find symbol
+[ERROR]   symbol:   method getIsAdmin()
+[ERROR]   location: variable cm of type com.connecthub.connecthub.entity.ChatMember
+[ERROR] /Users/antonyamalrekshingmail.com/Desktop/chat web/backend/src/main/java/com/connecthub/connecthub/controller/AdminController.java:[207,37] cannot find symbol
+[ERROR]   symbol:   method getChatType()
+[ERROR]   location: variable chat of type com.connecthub.connecthub.entity.Chat
+[ERROR] /Users/antonyamalrekshingmail.com/Desktop/chat web/backend/src/main/java/com/connecthub/connecthub/controller/AdminController.java:[213,15] cannot find symbol
+[ERROR]   symbol:   method setIsAdmin(boolean)
+[ERROR]   location: variable cm of type com.connecthub.connecthub.entity.ChatMember
+[ERROR] /Users/antonyamalrekshingmail.com/Desktop/chat web/backend/src/main/java/com/connecthub/connecthub/controller/AdminController.java:[216,106] cannot find symbol
+[ERROR]   symbol:   method getUser()
+[ERROR]   location: variable cm of type com.connecthub.connecthub.entity.ChatMember
+[ERROR] /Users/antonyamalrekshingmail.com/Desktop/chat web/backend/src/main/java/com/connecthub/connecthub/controller/AdminController.java:[216,183] cannot find symbol
+[ERROR]   symbol:   method getName()
+[ERROR]   location: variable chat of type com.connecthub.connecthub.entity.Chat
+[ERROR] /Users/antonyamalrekshingmail.com/Desktop/chat web/backend/src/main/java/com/connecthub/connecthub/controller/AdminController.java:[224,37] cannot find symbol
+[ERROR]   symbol:   method getChatType()
+[ERROR]   location: variable chat of type com.connecthub.connecthub.entity.Chat
+[ERROR] /Users/antonyamalrekshingmail.com/Desktop/chat web/backend/src/main/java/com/connecthub/connecthub/controller/AdminController.java:[232,101] cannot find symbol
+[ERROR]   symbol:   method getUser()
+[ERROR]   location: variable cm of type com.connecthub.connecthub.entity.ChatMember
+[ERROR] /Users/antonyamalrekshingmail.com/Desktop/chat web/backend/src/main/java/com/connecthub/connecthub/controller/AdminController.java:[232,149] cannot find symbol
+[ERROR]   symbol:   method getName()
+[ERROR]   location: variable chat of type com.connecthub.connecthub.entity.Chat
+[ERROR] /Users/antonyamalrekshingmail.com/Desktop/chat web/backend/src/main/java/com/connecthub/connecthub/service/AuditService.java:[20,36] cannot find symbol
+[ERROR]   symbol:   method builder()
+[ERROR]   location: class com.connecthub.connecthub.entity.AuditLog
+[ERROR] /Users/antonyamalrekshingmail.com/Desktop/chat web/backend/src/main/java/com/connecthub/connecthub/service/AdminStatsService.java:[27,31] cannot find symbol
+[ERROR]   symbol:   method getStatus()
+[ERROR]   location: variable u of type com.connecthub.connecthub.entity.User
+[ERROR] /Users/antonyamalrekshingmail.com/Desktop/chat web/backend/src/main/java/com/connecthub/connecthub/service/AdminStatsService.java:[27,72] cannot find symbol
+[ERROR]   symbol:   method getStatus()
+[ERROR]   location: variable u of type com.connecthub.connecthub.entity.User
+[ERROR] /Users/antonyamalrekshingmail.com/Desktop/chat web/backend/src/main/java/com/connecthub/connecthub/service/AdminStatsService.java:[41,62] cannot find symbol
+[ERROR]   symbol:   method builder()
+[ERROR]   location: class com.connecthub.connecthub.dto.AdminDashboardDTO.TrendData
+[ERROR] /Users/antonyamalrekshingmail.com/Desktop/chat web/backend/src/main/java/com/connecthub/connecthub/service/AdminStatsService.java:[48,42] cannot find symbol
+[ERROR]   symbol:   method setMessages(long)
+[ERROR]   location: class com.connecthub.connecthub.dto.AdminDashboardDTO.TrendData
+[ERROR] /Users/antonyamalrekshingmail.com/Desktop/chat web/backend/src/main/java/com/connecthub/connecthub/service/AdminStatsService.java:[57,42] cannot find symbol
+[ERROR]   symbol:   method setUsers(long)
+[ERROR]   location: class com.connecthub.connecthub.dto.AdminDashboardDTO.TrendData
+[ERROR] /Users/antonyamalrekshingmail.com/Desktop/chat web/backend/src/main/java/com/connecthub/connecthub/service/AdminStatsService.java:[62,33] cannot find symbol
+[ERROR]   symbol:   method builder()
+[ERROR]   location: class com.connecthub.connecthub.dto.AdminDashboardDTO
+[ERROR] /Users/antonyamalrekshingmail.com/Desktop/chat web/backend/src/main/java/com/connecthub/connecthub/controller/AnnouncementController.java:[49,48] cannot find symbol
+[ERROR]   symbol:   method getId()
+[ERROR]   location: variable a of type com.connecthub.connecthub.entity.Announcement
+[ERROR] /Users/antonyamalrekshingmail.com/Desktop/chat web/backend/src/main/java/com/connecthub/connecthub/controller/AnnouncementController.java:[49,59] cannot find symbol
+[ERROR]   symbol:   method getTitle()
+[ERROR]   location: variable a of type com.connecthub.connecthub.entity.Announcement
+[ERROR] /Users/antonyamalrekshingmail.com/Desktop/chat web/backend/src/main/java/com/connecthub/connecthub/controller/AnnouncementController.java:[49,73] cannot find symbol
+[ERROR]   symbol:   method getContent()
+[ERROR]   location: variable a of type com.connecthub.connecthub.entity.Announcement
+[ERROR] /Users/antonyamalrekshingmail.com/Desktop/chat web/backend/src/main/java/com/connecthub/connecthub/controller/AnnouncementController.java:[49,89] cannot find symbol
+[ERROR]   symbol:   method getCreatedBy()
+[ERROR]   location: variable a of type com.connecthub.connecthub.entity.Announcement
+[ERROR] /Users/antonyamalrekshingmail.com/Desktop/chat web/backend/src/main/java/com/connecthub/connecthub/controller/AnnouncementController.java:[49,121] cannot find symbol
+[ERROR]   symbol:   method getCreatedAt()
+[ERROR]   location: variable a of type com.connecthub.connecthub.entity.Announcement
+[ERROR] /Users/antonyamalrekshingmail.com/Desktop/chat web/backend/src/main/java/com/connecthub/connecthub/controller/AnnouncementController.java:[60,49] cannot find symbol
+[ERROR]   symbol:   method builder()
+[ERROR]   location: class com.connecthub.connecthub.entity.Announcement
+[ERROR] /Users/antonyamalrekshingmail.com/Desktop/chat web/backend/src/main/java/com/connecthub/connecthub/controller/AnnouncementController.java:[68,97] cannot find symbol
+[ERROR]   symbol:   method getTitle()
+[ERROR]   location: variable saved of type com.connecthub.connecthub.entity.Announcement
+[ERROR] /Users/antonyamalrekshingmail.com/Desktop/chat web/backend/src/main/java/com/connecthub/connecthub/controller/AnnouncementController.java:[70,56] cannot find symbol
+[ERROR]   symbol:   method getId()
+[ERROR]   location: variable saved of type com.connecthub.connecthub.entity.Announcement
+[ERROR] /Users/antonyamalrekshingmail.com/Desktop/chat web/backend/src/main/java/com/connecthub/connecthub/controller/AnnouncementController.java:[70,71] cannot find symbol
+[ERROR]   symbol:   method getTitle()
+[ERROR]   location: variable saved of type com.connecthub.connecthub.entity.Announcement
+[ERROR] /Users/antonyamalrekshingmail.com/Desktop/chat web/backend/src/main/java/com/connecthub/connecthub/controller/AnnouncementController.java:[70,89] cannot find symbol
+[ERROR]   symbol:   method getContent()
+[ERROR]   location: variable saved of type com.connecthub.connecthub.entity.Announcement
+[ERROR] /Users/antonyamalrekshingmail.com/Desktop/chat web/backend/src/main/java/com/connecthub/connecthub/controller/AnnouncementController.java:[70,109] cannot find symbol
+[ERROR]   symbol:   method getCreatedBy()
+[ERROR]   location: variable saved of type com.connecthub.connecthub.entity.Announcement
+[ERROR] /Users/antonyamalrekshingmail.com/Desktop/chat web/backend/src/main/java/com/connecthub/connecthub/controller/AnnouncementController.java:[70,145] cannot find symbol
+[ERROR]   symbol:   method getCreatedAt()
+[ERROR]   location: variable saved of type com.connecthub.connecthub.entity.Announcement
+[ERROR] /Users/antonyamalrekshingmail.com/Desktop/chat web/backend/src/main/java/com/connecthub/connecthub/controller/AnnouncementController.java:[84,41] cannot find symbol
+[ERROR]   symbol:   method getTitle()
+[ERROR]   location: variable saved of type com.connecthub.connecthub.entity.Announcement
+[ERROR] /Users/antonyamalrekshingmail.com/Desktop/chat web/backend/src/main/java/com/connecthub/connecthub/controller/AnnouncementController.java:[84,71] cannot find symbol
+[ERROR]   symbol:   method getContent()
+[ERROR]   location: variable saved of type com.connecthub.connecthub.entity.Announcement
+[ERROR] /Users/antonyamalrekshingmail.com/Desktop/chat web/backend/src/main/java/com/connecthub/connecthub/controller/AnnouncementController.java:[81,38] cannot find symbol
+[ERROR]   symbol:   method builder()
+[ERROR]   location: class com.connecthub.connecthub.entity.Message
+[ERROR] /Users/antonyamalrekshingmail.com/Desktop/chat web/backend/src/main/java/com/connecthub/connecthub/controller/AnnouncementController.java:[97,22] cannot find symbol
+[ERROR]   symbol:   method getUsername()
+[ERROR]   location: variable admin of type com.connecthub.connecthub.entity.User
+[ERROR] /Users/antonyamalrekshingmail.com/Desktop/chat web/backend/src/main/java/com/connecthub/connecthub/controller/AnnouncementController.java:[96,24] cannot find symbol
+[ERROR]   symbol:   method getCreatedAt()
+[ERROR]   location: variable message of type com.connecthub.connecthub.entity.Message
+[ERROR] /Users/antonyamalrekshingmail.com/Desktop/chat web/backend/src/main/java/com/connecthub/connecthub/controller/AnnouncementController.java:[93,24] cannot find symbol
+[ERROR]   symbol:   method getContent()
+[ERROR]   location: variable message of type com.connecthub.connecthub.entity.Message
+[ERROR] /Users/antonyamalrekshingmail.com/Desktop/chat web/backend/src/main/java/com/connecthub/connecthub/controller/AnnouncementController.java:[92,22] cannot find symbol
+[ERROR]   symbol:   method getId()
+[ERROR]   location: variable admin of type com.connecthub.connecthub.entity.User
+[ERROR] /Users/antonyamalrekshingmail.com/Desktop/chat web/backend/src/main/java/com/connecthub/connecthub/controller/AnnouncementController.java:[91,24] cannot find symbol
+[ERROR]   symbol:   method getId()
+[ERROR]   location: variable annChat of type com.connecthub.connecthub.entity.Chat
+[ERROR] /Users/antonyamalrekshingmail.com/Desktop/chat web/backend/src/main/java/com/connecthub/connecthub/controller/AnnouncementController.java:[90,24] cannot find symbol
+[ERROR]   symbol:   method getId()
+[ERROR]   location: variable message of type com.connecthub.connecthub.entity.Message
+[ERROR] /Users/antonyamalrekshingmail.com/Desktop/chat web/backend/src/main/java/com/connecthub/connecthub/controller/AnnouncementController.java:[103,70] cannot find symbol
+[ERROR]   symbol:   method getId()
+[ERROR]   location: variable annChat of type com.connecthub.connecthub.entity.Chat
+[ERROR] /Users/antonyamalrekshingmail.com/Desktop/chat web/backend/src/main/java/com/connecthub/connecthub/controller/AnnouncementController.java:[114,111] cannot find symbol
+[ERROR]   symbol:   method getTitle()
+[ERROR]   location: variable ann of type com.connecthub.connecthub.entity.Announcement
+[ERROR] /Users/antonyamalrekshingmail.com/Desktop/chat web/backend/src/main/java/com/connecthub/connecthub/controller/AuditController.java:[29,28] cannot find symbol
+[ERROR]   symbol:   method getId()
+[ERROR]   location: variable log of type com.connecthub.connecthub.entity.AuditLog
+[ERROR] /Users/antonyamalrekshingmail.com/Desktop/chat web/backend/src/main/java/com/connecthub/connecthub/controller/AuditController.java:[30,28] cannot find symbol
+[ERROR]   symbol:   method getAdmin()
+[ERROR]   location: variable log of type com.connecthub.connecthub.entity.AuditLog
+[ERROR] /Users/antonyamalrekshingmail.com/Desktop/chat web/backend/src/main/java/com/connecthub/connecthub/controller/AuditController.java:[31,28] cannot find symbol
+[ERROR]   symbol:   method getAction()
+[ERROR]   location: variable log of type com.connecthub.connecthub.entity.AuditLog
+[ERROR] /Users/antonyamalrekshingmail.com/Desktop/chat web/backend/src/main/java/com/connecthub/connecthub/controller/AuditController.java:[32,28] cannot find symbol
+[ERROR]   symbol:   method getDetails()
+[ERROR]   location: variable log of type com.connecthub.connecthub.entity.AuditLog
+[ERROR] /Users/antonyamalrekshingmail.com/Desktop/chat web/backend/src/main/java/com/connecthub/connecthub/controller/AuditController.java:[33,28] cannot find symbol
+[ERROR]   symbol:   method getIpAddress()
+[ERROR]   location: variable log of type com.connecthub.connecthub.entity.AuditLog
+[ERROR] /Users/antonyamalrekshingmail.com/Desktop/chat web/backend/src/main/java/com/connecthub/connecthub/controller/AuditController.java:[34,28] cannot find symbol
+[ERROR]   symbol:   method getCreatedAt()
+[ERROR]   location: variable log of type com.connecthub.connecthub.entity.AuditLog
+[ERROR] /Users/antonyamalrekshingmail.com/Desktop/chat web/backend/src/main/java/com/connecthub/connecthub/controller/AuthController.java:[36,68] cannot find symbol
+[ERROR]   symbol:   method getUsername()
+[ERROR]   location: variable authRequest of type com.connecthub.connecthub.dto.AuthRequest
+[ERROR] /Users/antonyamalrekshingmail.com/Desktop/chat web/backend/src/main/java/com/connecthub/connecthub/controller/AuthController.java:[36,95] cannot find symbol
+[ERROR]   symbol:   method getPassword()
+[ERROR]   location: variable authRequest of type com.connecthub.connecthub.dto.AuthRequest
+[ERROR] /Users/antonyamalrekshingmail.com/Desktop/chat web/backend/src/main/java/com/connecthub/connecthub/controller/AuthController.java:[39,62] cannot find symbol
+[ERROR]   symbol:   method getUsername()
+[ERROR]   location: variable authRequest of type com.connecthub.connecthub.dto.AuthRequest
+[ERROR] /Users/antonyamalrekshingmail.com/Desktop/chat web/backend/src/main/java/com/connecthub/connecthub/controller/AuthController.java:[42,50] cannot find symbol
+[ERROR]   symbol:   method getUsername()
+[ERROR]   location: variable user of type com.connecthub.connecthub.entity.User
+[ERROR] /Users/antonyamalrekshingmail.com/Desktop/chat web/backend/src/main/java/com/connecthub/connecthub/controller/AuthController.java:[43,113] cannot find symbol
+[ERROR]   symbol:   method getRole()
+[ERROR]   location: variable user of type com.connecthub.connecthub.entity.User
+[ERROR] /Users/antonyamalrekshingmail.com/Desktop/chat web/backend/src/main/java/com/connecthub/connecthub/controller/AuthController.java:[43,96] cannot find symbol
+[ERROR]   symbol:   method getEmail()
+[ERROR]   location: variable user of type com.connecthub.connecthub.entity.User
+[ERROR] /Users/antonyamalrekshingmail.com/Desktop/chat web/backend/src/main/java/com/connecthub/connecthub/controller/AuthController.java:[43,76] cannot find symbol
+[ERROR]   symbol:   method getUsername()
+[ERROR]   location: variable user of type com.connecthub.connecthub.entity.User
+[ERROR] /Users/antonyamalrekshingmail.com/Desktop/chat web/backend/src/main/java/com/connecthub/connecthub/controller/AuthController.java:[43,62] cannot find symbol
+[ERROR]   symbol:   method getId()
+[ERROR]   location: variable user of type com.connecthub.connecthub.entity.User
+[ERROR] /Users/antonyamalrekshingmail.com/Desktop/chat web/backend/src/main/java/com/connecthub/connecthub/controller/AuthController.java:[48,52] cannot find symbol
+[ERROR]   symbol:   method getUsername()
+[ERROR]   location: variable request of type com.connecthub.connecthub.dto.RegisterRequest
+[ERROR] /Users/antonyamalrekshingmail.com/Desktop/chat web/backend/src/main/java/com/connecthub/connecthub/controller/AuthController.java:[51,49] cannot find symbol
+[ERROR]   symbol:   method getEmail()
+[ERROR]   location: variable request of type com.connecthub.connecthub.dto.RegisterRequest
+[ERROR] /Users/antonyamalrekshingmail.com/Desktop/chat web/backend/src/main/java/com/connecthub/connecthub/controller/AuthController.java:[58,25] cannot find symbol
+[ERROR]   symbol:   method builder()
+[ERROR]   location: class com.connecthub.connecthub.entity.User
+[ERROR] /Users/antonyamalrekshingmail.com/Desktop/chat web/backend/src/main/java/com/connecthub/connecthub/controller/AuthController.java:[59,34] cannot find symbol
+[ERROR]   symbol:   method getUsername()
+[ERROR]   location: variable request of type com.connecthub.connecthub.dto.RegisterRequest
+[ERROR] /Users/antonyamalrekshingmail.com/Desktop/chat web/backend/src/main/java/com/connecthub/connecthub/controller/AuthController.java:[60,34] cannot find symbol
+[ERROR]   symbol:   method getUsername()
+[ERROR]   location: variable request of type com.connecthub.connecthub.dto.RegisterRequest
+[ERROR] /Users/antonyamalrekshingmail.com/Desktop/chat web/backend/src/main/java/com/connecthub/connecthub/controller/AuthController.java:[61,31] cannot find symbol
+[ERROR]   symbol:   method getEmail()
+[ERROR]   location: variable request of type com.connecthub.connecthub.dto.RegisterRequest
+[ERROR] /Users/antonyamalrekshingmail.com/Desktop/chat web/backend/src/main/java/com/connecthub/connecthub/controller/AuthController.java:[62,57] cannot find symbol
+[ERROR]   symbol:   method getPassword()
+[ERROR]   location: variable request of type com.connecthub.connecthub.dto.RegisterRequest
+[ERROR] /Users/antonyamalrekshingmail.com/Desktop/chat web/backend/src/main/java/com/connecthub/connecthub/controller/ChatController.java:[40,18] cannot find symbol
+[ERROR]   symbol:   method getAttachments()
+[ERROR]   location: variable m of type com.connecthub.connecthub.entity.Message
+[ERROR] /Users/antonyamalrekshingmail.com/Desktop/chat web/backend/src/main/java/com/connecthub/connecthub/controller/ChatController.java:[40,49] cannot find symbol
+[ERROR]   symbol:   method getAttachments()
+[ERROR]   location: variable m of type com.connecthub.connecthub.entity.Message
+[ERROR] /Users/antonyamalrekshingmail.com/Desktop/chat web/backend/src/main/java/com/connecthub/connecthub/controller/ChatController.java:[41,28] cannot find symbol
+[ERROR]   symbol:   method getAttachments()
+[ERROR]   location: variable m of type com.connecthub.connecthub.entity.Message
+[ERROR] /Users/antonyamalrekshingmail.com/Desktop/chat web/backend/src/main/java/com/connecthub/connecthub/controller/ChatController.java:[55,18] cannot find symbol
+[ERROR]   symbol:   method getReplyToMessage()
+[ERROR]   location: variable m of type com.connecthub.connecthub.entity.Message
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException

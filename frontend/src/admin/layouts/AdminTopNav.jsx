@@ -4,7 +4,7 @@ import api from '../../services/api';
 import { LogOut, Bell, Search, Menu } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
-const AdminTopNav = () => {
+const AdminTopNav = ({ onMenuClick }) => {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
 
@@ -37,8 +37,11 @@ const AdminTopNav = () => {
 
   return (
     <header className="h-16 bg-slate-900 border-b border-slate-800 flex items-center justify-between px-6 z-10 sticky top-0">
-      <div className="flex items-center">
-        <div className="relative md:w-64">
+      <div className="flex items-center flex-1">
+        <button onClick={onMenuClick} className="p-2 md:hidden text-slate-400 hover:text-white transition-colors mr-2">
+          <Menu size={24} />
+        </button>
+        <div className="relative w-full max-w-xs hidden sm:block md:w-64">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-500 w-4 h-4" />
           <input 
             type="text" 

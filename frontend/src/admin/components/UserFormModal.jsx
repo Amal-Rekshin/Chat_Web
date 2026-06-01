@@ -23,8 +23,8 @@ const UserFormModal = ({ user, onClose, onSave }) => {
     defaultValues: {
       username: user?.username || '',
       email: user?.email || '',
-      role: user?.role || 'USER',
-      status: user?.status || 'OFFLINE',
+      role: user?.role?.name || user?.role || 'USER',
+      status: user?.status?.name || user?.status || 'OFFLINE',
       password: '',
       groupIds: []
     }

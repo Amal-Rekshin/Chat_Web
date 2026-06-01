@@ -40,6 +40,12 @@ public class ChatMember {
     @Column(name = "joined_at", updatable = false)
     private LocalDateTime joinedAt;
 
+    @Column(name = "last_read_id")
+    private Long lastReadId;
+
+    @Column(name = "last_delivered_id")
+    private Long lastDeliveredId;
+
     @PrePersist
     protected void onCreate() {
         joinedAt = LocalDateTime.now();

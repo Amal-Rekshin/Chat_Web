@@ -47,12 +47,19 @@ public class ChatWebSocketController {
         MessageType type = messageTypeRepository.findByName(payload.getMessageType() != null ? payload.getMessageType() : "TEXT")
             .orElseThrow(() -> new RuntimeException("Message Type not found"));
 
+        // Handle reply
+        Message replyTo = null;
+        if (payload.getReplyToMessageId() != null) {
+            replyTo = messageRepository.findById(payload.getReplyToMessageId()).orElse(null);
+        }
+
         // Save message to DB
         Message message = Message.builder()
                 .chat(chat)
                 .sender(sender)
                 .content(payload.getContent())
                 .messageType(type)
+                .replyToMessage(replyTo)
                 .build();
         
         message = messageRepository.save(message);
@@ -68,10 +75,24 @@ public class ChatWebSocketController {
             message.setAttachments(Collections.singletonList(attachment));
         }
 
+        ChatMember senderMember = chatMemberRepository.findByChatIdAndUserId(chatId, sender.getId());
+        if (senderMember != null) {
+            senderMember.setLastReadId(message.getId());
+            if (senderMember.getLastDeliveredId() == null || senderMember.getLastDeliveredId() < message.getId()) {
+                senderMember.setLastDeliveredId(message.getId());
+            }
+            chatMemberRepository.save(senderMember);
+        }
+
         payload.setId(message.getId());
         payload.setCreatedAt(message.getCreatedAt());
         payload.setSenderName(message.getSender().getUsername());
         payload.setIsEdited(message.getIsEdited());
+        if (message.getReplyToMessage() != null) {
+            payload.setReplyToMessageId(message.getReplyToMessage().getId());
+            payload.setReplyToMessageContent(message.getReplyToMessage().getContent());
+            payload.setReplyToSenderName(message.getReplyToMessage().getSender().getUsername());
+        }
 
         // Broadcast to specific chat topic
         messagingTemplate.convertAndSend("/topic/chat/" + chatId, payload);
@@ -116,7 +137,10 @@ public class ChatWebSocketController {
             fileUrl,
             message.getCreatedAt(),
             message.getSender().getUsername(),
-            message.getIsEdited()
+            message.getIsEdited(),
+            message.getReplyToMessage() != null ? message.getReplyToMessage().getId() : null,
+            message.getReplyToMessage() != null ? message.getReplyToMessage().getContent() : null,
+            message.getReplyToMessage() != null ? message.getReplyToMessage().getSender().getUsername() : null
         );
         messagingTemplate.convertAndSend("/topic/chat/" + chatId, responsePayload);
     }

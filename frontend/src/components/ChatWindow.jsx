@@ -7,6 +7,8 @@ import EmojiPicker from 'emoji-picker-react';
 import { Send, Image as ImageIcon, Smile, Plus, UserPlus } from 'lucide-react';
 import AddGroupMemberModal from './AddGroupMemberModal';
 import ChatInfoSidebar from './ChatInfoSidebar';
+import { formatImageUrl } from '../utils/imageUtils';
+
 const ChatWindow = ({
   chat,
   onBack
@@ -16,6 +18,7 @@ const ChatWindow = ({
   const [showEmojiPicker, setShowEmojiPicker] = useState(false);
   const [typingUsers, setTypingUsers] = useState(new Set());
   const [editingMessage, setEditingMessage] = useState(null);
+  const [replyingToMessage, setReplyingToMessage] = useState(null);
   const [memberStatuses, setMemberStatuses] = useState([]);
   const [showAddMemberModal, setShowAddMemberModal] = useState(false);
   const [showInfo, setShowInfo] = useState(false);
@@ -117,6 +120,7 @@ const ChatWindow = ({
       if (subStatus) subStatus.unsubscribe();
       setTypingUsers(new Set());
       setEditingMessage(null);
+      setReplyingToMessage(null);
       setInput('');
     };
   }, [chat.id, client, connected, user?.id]);
@@ -154,18 +158,26 @@ const ChatWindow = ({
       sendEditMessageEvent(chat.id, editingMessage.id, input);
       setEditingMessage(null);
     } else {
-      sendMessage(chat.id, input, 'TEXT');
+      sendMessage(chat.id, input, 'TEXT', null, replyingToMessage?.id);
     }
     
     setInput('');
     setShowEmojiPicker(false);
+    setReplyingToMessage(null);
     sendTypingEvent(chat.id, false);
     if (typingTimeoutRef.current) clearTimeout(typingTimeoutRef.current);
   };
   
   const handleEditRequest = (msg) => {
     setEditingMessage(msg);
+    setReplyingToMessage(null);
     setInput(msg.content);
+  };
+
+  const handleReplyRequest = (msg) => {
+    setReplyingToMessage(msg);
+    setEditingMessage(null);
+    // Optional: focus input
   };
 
   const handleFileUpload = async (e, type) => {
@@ -185,7 +197,7 @@ const ChatWindow = ({
       
       const { fileUrl, fileName } = res.data;
       
-      sendMessage(chat.id, fileName, type, fileUrl);
+      sendMessage(chat.id, fileName, type, fileUrl, replyingToMessage?.id);
     } catch (err) {
       console.error('File upload failed', err);
       alert('Failed to upload file');
@@ -210,7 +222,7 @@ const ChatWindow = ({
           <div className="w-10 h-10 rounded-full bg-slate-700 border border-slate-600 flex items-center justify-center font-bold text-white overflow-hidden shrink-0">
             {chat.image ? (
               <>
-                <img src={chat.image} className="w-full h-full object-cover" alt="" onError={(e) => { e.target.style.display='none'; e.target.nextSibling.style.display='block'; }} />
+                <img src={formatImageUrl(chat.image)} className="w-full h-full object-cover" alt="" onError={(e) => { e.target.style.display='none'; e.target.nextSibling.style.display='block'; }} />
                 <span style={{display: 'none'}}>{chat.name?.[0]?.toUpperCase() || 'C'}</span>
               </>
             ) : chat.name?.[0]?.toUpperCase() || 'C'}
@@ -240,7 +252,7 @@ const ChatWindow = ({
                if (msg.id <= maxRead) status = 'READ';
                else if (msg.id <= maxDelivered) status = 'DELIVERED';
            }
-           return <MessageBubble key={idx} message={msg || {}} isOwn={isOwn} status={status} onEditRequest={handleEditRequest} />
+           return <MessageBubble key={idx} message={msg || {}} isOwn={isOwn} status={status} onEditRequest={handleEditRequest} onReplyRequest={handleReplyRequest} />
         })}
         {typingUsers.size > 0 && (
           <div className="text-sm text-slate-400 italic animate-pulse">
@@ -259,9 +271,9 @@ const ChatWindow = ({
         <div className="p-4 bg-slate-900 border-t border-slate-800 shrink-0 flex justify-center text-red-400 italic text-sm font-medium">
           You cannot message this user any further
         </div>
-      ) : chat.type === 'ANNOUNCEMENT' && user?.role !== 'ADMIN' ? (
+      ) : chat.type === 'ANNOUNCEMENT' ? (
         <div className="p-4 bg-slate-900 border-t border-slate-800 shrink-0 flex justify-center text-slate-500 italic text-sm font-medium">
-          Only Admins can send announcements
+          Announcements are broadcast by the system
         </div>
       ) : (
         <div className="p-4 bg-slate-900 border-t border-slate-800 shrink-0 relative">
@@ -280,6 +292,17 @@ const ChatWindow = ({
               <div className="flex items-center justify-between bg-slate-800/80 px-4 py-2 rounded-t-2xl border-t border-l border-r border-slate-700 text-sm">
                 <span className="text-indigo-400 font-medium">Editing message...</span>
                 <button type="button" onClick={() => { setEditingMessage(null); setInput(''); }} className="text-slate-400 hover:text-white transition-colors">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+                </button>
+              </div>
+            )}
+            {replyingToMessage && (
+              <div className="flex items-center justify-between bg-slate-800/80 px-4 py-2 mb-2 rounded-t-2xl border-t border-l border-r border-slate-700 text-sm">
+                <div className="flex flex-col truncate pr-4">
+                  <span className="text-indigo-400 font-medium text-xs">Replying to {replyingToMessage.senderName || replyingToMessage.sender?.username}</span>
+                  <span className="text-slate-300 truncate max-w-[200px] sm:max-w-md">{replyingToMessage.content}</span>
+                </div>
+                <button type="button" onClick={() => setReplyingToMessage(null)} className="text-slate-400 hover:text-white transition-colors shrink-0">
                   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
                 </button>
               </div>
@@ -312,7 +335,7 @@ const ChatWindow = ({
                 </div>
               )}
             
-            <div className={`flex-1 bg-slate-800 border-slate-700 flex items-end shadow-inner min-h-[44px] ${editingMessage ? 'rounded-b-2xl rounded-tr-2xl border-b border-l border-r' : 'rounded-2xl border'}`}>
+            <div className={`flex-1 bg-slate-800 border-slate-700 flex items-end shadow-inner min-h-[44px] ${editingMessage || replyingToMessage ? 'rounded-b-2xl rounded-tr-2xl border-b border-l border-r' : 'rounded-2xl border'}`}>
               <textarea value={input} onChange={handleInputChange} disabled={uploading} placeholder={uploading ? "Uploading..." : "Type a message..."} className="w-full bg-transparent text-slate-200 placeholder-slate-500 px-4 py-3 focus:outline-none resize-none max-h-32 min-h-[44px]" rows={1} onKeyDown={e => {
               if (e.key === 'Enter' && !e.shiftKey) {
                 e.preventDefault();

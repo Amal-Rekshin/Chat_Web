@@ -77,8 +77,11 @@ public class ChatService {
         Chat chat = chatRepository.findById(chatId)
             .orElseThrow(() -> new RuntimeException("Chat not found"));
             
+        User reqUser = userRepository.findById(requesterId).orElse(null);
+        boolean isSystemAdmin = reqUser != null && "ADMIN".equals(reqUser.getRole().getName());
+        
         ChatMember requester = chatMemberRepository.findByChatIdAndUserId(chatId, requesterId);
-        if (requester == null || !requester.getIsAdmin()) {
+        if (!isSystemAdmin && (requester == null || !requester.getIsAdmin())) {
             throw new RuntimeException("Only group admins can add members");
         }
         
@@ -144,8 +147,11 @@ public class ChatService {
 
     @Transactional
     public void removeGroupMember(Long chatId, Long userId, Long requesterId) {
+        User reqUser = userRepository.findById(requesterId).orElse(null);
+        boolean isSystemAdmin = reqUser != null && "ADMIN".equals(reqUser.getRole().getName());
+
         ChatMember requester = chatMemberRepository.findByChatIdAndUserId(chatId, requesterId);
-        if (requester == null || !requester.getIsAdmin()) {
+        if (!isSystemAdmin && (requester == null || !requester.getIsAdmin())) {
             throw new RuntimeException("Only group admins can remove members");
         }
         
@@ -157,8 +163,11 @@ public class ChatService {
 
     @Transactional
     public void updateMemberRole(Long chatId, Long userId, Long requesterId, String newRole) {
+        User reqUser = userRepository.findById(requesterId).orElse(null);
+        boolean isSystemAdmin = reqUser != null && "ADMIN".equals(reqUser.getRole().getName());
+
         ChatMember requester = chatMemberRepository.findByChatIdAndUserId(chatId, requesterId);
-        if (requester == null || !requester.getIsAdmin()) {
+        if (!isSystemAdmin && (requester == null || !requester.getIsAdmin())) {
             throw new RuntimeException("Only group admins can update roles");
         }
         
@@ -173,17 +182,7 @@ public class ChatService {
         return chatMemberRepository.findOtherMemberUsername(chatId, userId);
     }
 
-    @Transactional
-    public void markChatAsRead(Long chatId, Long userId) {
-    }
 
-    @Transactional
-    public void markChatAsDelivered(Long chatId, Long userId) {
-    }
-
-    public java.util.List<MemberStatusDTO> getMemberStatuses(Long chatId) {
-        return java.util.Collections.emptyList();
-    }
 
     @Transactional
     public java.util.List<com.connecthub.connecthub.dto.ChatDTO> getUserChats(Long userId) {
@@ -234,6 +233,10 @@ public class ChatService {
             
             ChatMember member = chatMemberRepository.findByChatIdAndUserId(chat.getId(), userId);
             Long unreadCount = 0L;
+            if (member != null) {
+                Long lastRead = member.getLastReadId() != null ? member.getLastReadId() : 0L;
+                unreadCount = messageRepository.countByChatIdAndIdGreaterThan(chat.getId(), lastRead);
+            }
             String currentUserRole = member != null && member.getIsAdmin() ? "ADMIN" : "MEMBER";
             
             Message lastMessage = messageRepository.findFirstByChatIdOrderByCreatedAtDesc(chat.getId());
@@ -299,7 +302,6 @@ public class ChatService {
                 
             User otherUser = otherMember.getUser();
             builder.name(otherUser.getUsername())
-                   .image(otherUser.getProfileImageUrl())
                    .email(otherUser.getEmail())
                    .status(otherUser.getStatus().getName())
                    .lastSeen(otherUser.getLastSeen());
@@ -314,7 +316,6 @@ public class ChatService {
                     .userId(m.getUser().getId())
                     .username(m.getUser().getUsername())
                     .email(m.getUser().getEmail())
-                    .profileImage(m.getUser().getProfileImageUrl())
                     .role(m.getIsAdmin() ? "ADMIN" : "MEMBER")
                     .status(m.getUser().getStatus().getName())
                     .build()
@@ -323,7 +324,64 @@ public class ChatService {
             builder.members(memberDTOs)
                    .memberCount((long) memberDTOs.size());
         }
-        
         return builder.build();
+    }
+
+    @Transactional
+    public void markChatAsRead(Long chatId, Long userId) {
+        ChatMember member = chatMemberRepository.findByChatIdAndUserId(chatId, userId);
+        if (member != null) {
+            Message lastMsg = messageRepository.findFirstByChatIdOrderByCreatedAtDesc(chatId);
+            if (lastMsg != null) {
+                member.setLastReadId(lastMsg.getId());
+                if (member.getLastDeliveredId() == null || member.getLastDeliveredId() < lastMsg.getId()) {
+                    member.setLastDeliveredId(lastMsg.getId());
+                }
+                chatMemberRepository.save(member);
+            }
+        }
+    }
+
+    @Transactional
+    public void markChatAsDelivered(Long chatId, Long userId) {
+        ChatMember member = chatMemberRepository.findByChatIdAndUserId(chatId, userId);
+        if (member != null) {
+            Message lastMsg = messageRepository.findFirstByChatIdOrderByCreatedAtDesc(chatId);
+            if (lastMsg != null) {
+                if (member.getLastDeliveredId() == null || member.getLastDeliveredId() < lastMsg.getId()) {
+                    member.setLastDeliveredId(lastMsg.getId());
+                    chatMemberRepository.save(member);
+                }
+            }
+        }
+    }
+
+    public java.util.List<MemberStatusDTO> getMemberStatuses(Long chatId) {
+        return chatMemberRepository.findByChatId(chatId).stream()
+            .map(m -> new MemberStatusDTO(m.getUser().getId(), m.getLastDeliveredId(), m.getLastReadId()))
+            .collect(java.util.stream.Collectors.toList());
+    }
+
+    @Transactional
+    public void deleteChat(Long chatId, Long requesterId) {
+        User reqUser = userRepository.findById(requesterId).orElse(null);
+        boolean isSystemAdmin = reqUser != null && "ADMIN".equals(reqUser.getRole().getName());
+
+        ChatMember requester = chatMemberRepository.findByChatIdAndUserId(chatId, requesterId);
+        if (!isSystemAdmin && (requester == null || !requester.getIsAdmin())) {
+            throw new RuntimeException("Only group admins can delete chats");
+        }
+
+        List<Message> messages = messageRepository.findByChatIdOrderByCreatedAtAsc(chatId);
+        for (Message m : messages) {
+            m.setReplyToMessage(null); // Break self-referencing foreign keys
+        }
+        messageRepository.saveAll(messages);
+        messageRepository.deleteAllInBatch(messages);
+        
+        List<ChatMember> members = chatMemberRepository.findByChatId(chatId);
+        chatMemberRepository.deleteAllInBatch(members);
+        
+        chatRepository.deleteById(chatId);
     }
 }

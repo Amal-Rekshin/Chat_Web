@@ -5,6 +5,8 @@ import { useWebSocket } from '../context/WebSocketContext';
 import { Search, LogOut, Users, MessageSquarePlus } from 'lucide-react';
 import GroupModal from './GroupModal';
 import PrivateChatModal from './PrivateChatModal';
+import { formatImageUrl } from '../utils/imageUtils';
+
 const Sidebar = ({
   onSelectChat,
   selectedChatId
@@ -104,9 +106,9 @@ const Sidebar = ({
               <MessageSquarePlus size={18} />
             </button>
           )}
-          <button onClick={() => setShowGroupModal(true)} className="p-2 bg-slate-800 hover:bg-slate-700 rounded-full transition-colors text-slate-300" title="Create Group">
+          {/* <button onClick={() => setShowGroupModal(true)} className="p-2 bg-slate-800 hover:bg-slate-700 rounded-full transition-colors text-slate-300" title="Create Group">
             <Users size={18} />
-          </button>
+          </button> */}
           <button onClick={logout} className="p-2 bg-slate-800 hover:bg-red-500/20 hover:text-red-400 rounded-full transition-colors text-slate-300" title="Logout">
             <LogOut size={18} />
           </button>
@@ -128,7 +130,7 @@ const Sidebar = ({
               <div className="w-12 h-12 rounded-full bg-slate-700 flex items-center justify-center font-bold text-white overflow-hidden shrink-0 border border-slate-600">
                 {chat.image ? (
                   <>
-                    <img src={chat.image} className="w-full h-full object-cover" alt="" onError={(e) => { e.target.style.display='none'; e.target.nextSibling.style.display='block'; }} />
+                    <img src={formatImageUrl(chat.image)} className="w-full h-full object-cover" alt="" onError={(e) => { e.target.style.display='none'; e.target.nextSibling.style.display='block'; }} />
                     <span style={{display: 'none'}}>{chat.name?.[0]?.toUpperCase() || 'C'}</span>
                   </>
                 ) : chat.name?.[0]?.toUpperCase() || 'C'}

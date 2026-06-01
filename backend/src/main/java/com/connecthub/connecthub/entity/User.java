@@ -30,8 +30,6 @@ public class User {
     @Column(nullable = false)
     private String password;
 
-    @Column(name = "profile_image_url", columnDefinition = "TEXT")
-    private String profileImageUrl;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "role_id", nullable = false)
@@ -41,9 +39,6 @@ public class User {
     @JoinColumn(name = "status_id", nullable = false)
     private UserStatus status;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "department_id")
-    private Department department;
 
     @Column(name = "public_key", columnDefinition = "TEXT")
     private String publicKey;

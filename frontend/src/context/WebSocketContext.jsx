@@ -119,7 +119,7 @@ export const WebSocketProvider = ({
     return null;
   };
 
-  const sendMessage = (chatId, content, messageType, fileUrl = null) => {
+  const sendMessage = (chatId, content, messageType, fileUrl = null, replyToMessageId = null) => {
     if (client && connected && user) {
       client.publish({
         destination: `/app/chat/${chatId}/sendMessage`,
@@ -128,7 +128,8 @@ export const WebSocketProvider = ({
           senderId: user.id,
           content,
           messageType,
-          fileUrl
+          fileUrl,
+          replyToMessageId
         })
       });
     }

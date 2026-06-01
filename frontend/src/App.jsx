@@ -7,7 +7,6 @@ import Chat from './pages/Chat';
 import AdminLayout from './admin/layouts/AdminLayout';
 import AdminDashboard from './admin/pages/AdminDashboard';
 import UserManagement from './admin/pages/UserManagement';
-import DepartmentManagement from './admin/pages/DepartmentManagement';
 import GroupManagement from './admin/pages/GroupManagement';
 import AnnouncementsManagement from './admin/pages/AnnouncementsManagement';
 import { WebSocketProvider } from './context/WebSocketContext';
@@ -40,9 +39,7 @@ const App = () => {
             <Route path="/admin" element={<AdminRoute element={<AdminLayout />} />}>
               <Route index element={<AdminDashboard />} />
               <Route path="users" element={<UserManagement />} />
-              <Route path="departments" element={<DepartmentManagement />} />
               <Route path="groups" element={<GroupManagement />} />
-              {/* Placeholder for future admin modules */}
               <Route path="announcements" element={<AnnouncementsManagement />} />
             </Route>
           </Routes>

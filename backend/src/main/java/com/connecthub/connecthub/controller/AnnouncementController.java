@@ -95,7 +95,10 @@ public class AnnouncementController {
                 null,
                 message.getCreatedAt(),
                 admin.getUsername(),
-                false
+                false,
+                null,
+                null,
+                null
             );
             messagingTemplate.convertAndSend("/topic/chat/" + annChat.getId(), payload);
         }

@@ -49,7 +49,10 @@ public class ChatController {
                 fileUrl,
                 m.getCreatedAt(),
                 m.getSender().getUsername(),
-                m.getIsEdited()
+                m.getIsEdited(),
+                m.getReplyToMessage() != null ? m.getReplyToMessage().getId() : null,
+                m.getReplyToMessage() != null ? m.getReplyToMessage().getContent() : null,
+                m.getReplyToMessage() != null ? m.getReplyToMessage().getSender().getUsername() : null
             );
         }).toList();
         return ResponseEntity.ok(dtos);
@@ -138,6 +141,16 @@ public class ChatController {
         chatService.markChatAsDelivered(chatId, userId);
         broadcastStatus(chatId, userId);
         return ResponseEntity.ok().build();
+    }
+
+    @DeleteMapping("/{chatId}")
+    public ResponseEntity<?> deleteChat(@PathVariable Long chatId, @RequestParam Long requesterId) {
+        try {
+            chatService.deleteChat(chatId, requesterId);
+            return ResponseEntity.ok().build();
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
     }
 
     private void broadcastStatus(Long chatId, Long userId) {
