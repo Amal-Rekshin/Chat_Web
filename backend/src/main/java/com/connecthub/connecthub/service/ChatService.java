@@ -33,8 +33,15 @@ public class ChatService {
 
     @Transactional
     public Chat createGroupChat(CreateGroupRequest request) {
-        User creator = userRepository.findById(request.getCreatedBy())
-                .orElseThrow(() -> new RuntimeException("Creator not found"));
+        User creator;
+        if (request.getCreatedBy() == null) {
+            String username = org.springframework.security.core.context.SecurityContextHolder.getContext().getAuthentication().getName();
+            creator = userRepository.findByUsername(username)
+                    .orElseThrow(() -> new RuntimeException("Authenticated user not found"));
+        } else {
+            creator = userRepository.findById(request.getCreatedBy())
+                    .orElseThrow(() -> new RuntimeException("Creator not found"));
+        }
 
         ChatType groupType = chatTypeRepository.findByName("GROUP").orElseThrow();
 

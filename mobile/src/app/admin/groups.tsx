@@ -80,8 +80,7 @@ const GroupsManagement = () => {
       await api.post('/chats/group', { 
         name: groupName, 
         image: null,
-        // Since we don't have the full AuthContext user object in this file, we can fetch users later or 
-        // rely on the backend to use the currently authenticated user
+        createdBy: user?.id,
         memberIds: []
       });
       setModalVisible(false);
