@@ -1,0 +1,38 @@
+services:
+
+  mysql-container:
+    image: mysql:8.0
+    container_name: mysql-container
+
+    command: --default-authentication-plugin=mysql_native_password
+
+    environment:
+      MYSQL_ROOT_PASSWORD: 2805
+      MYSQL_DATABASE: practice
+      MYSQL_ROOT_HOST: "%"
+
+    ports:
+      - "3307:3306"
+
+    volumes:
+      - mysql-data:/var/lib/mysql
+
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-p2805"]
+      interval: 10s
+      timeout: 5s
+      retries: 20
+
+  springboot-app:
+    build: .
+    container_name: springboot-app
+
+    ports:
+      - "8080:8080"
+
+    depends_on:
+      mysql-container:
+        condition: service_healthy
+
+volumes:
+  mysql-data:
