@@ -20,7 +20,10 @@ const MessageBubble = ({
     });
   };
   const content = message.content || '';
-  const time = message.createdAt ? new Date(message.createdAt).toLocaleTimeString([], {
+  const dateStr = message.createdAt 
+    ? (message.createdAt.endsWith('Z') ? message.createdAt : message.createdAt + 'Z') 
+    : null;
+  const time = dateStr ? new Date(dateStr).toLocaleTimeString([], {
     hour: '2-digit',
     minute: '2-digit'
   }) : 'Now';

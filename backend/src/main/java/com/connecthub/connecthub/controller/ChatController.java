@@ -128,16 +128,16 @@ public class ChatController {
     }
 
     @PostMapping("/{chatId}/read")
-    public ResponseEntity<Void> markChatAsRead(@PathVariable Long chatId, @RequestBody java.util.Map<String, Long> payload) {
-        Long userId = payload.get("userId");
+    public ResponseEntity<Void> markChatAsRead(@PathVariable Long chatId, @RequestBody java.util.Map<String, Object> payload) {
+        Long userId = Long.valueOf(payload.get("userId").toString());
         chatService.markChatAsRead(chatId, userId);
         broadcastStatus(chatId, userId);
         return ResponseEntity.ok().build();
     }
 
     @PostMapping("/{chatId}/delivered")
-    public ResponseEntity<Void> markChatAsDelivered(@PathVariable Long chatId, @RequestBody java.util.Map<String, Long> payload) {
-        Long userId = payload.get("userId");
+    public ResponseEntity<Void> markChatAsDelivered(@PathVariable Long chatId, @RequestBody java.util.Map<String, Object> payload) {
+        Long userId = Long.valueOf(payload.get("userId").toString());
         chatService.markChatAsDelivered(chatId, userId);
         broadcastStatus(chatId, userId);
         return ResponseEntity.ok().build();

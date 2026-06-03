@@ -21,8 +21,11 @@ const MessageBubble: React.FC<MessageBubbleProps> = ({
   onLongPress
 }) => {
   const content = message.content || '';
-  const time = message.createdAt 
-    ? new Date(message.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) 
+  const dateStr = message.createdAt 
+    ? (message.createdAt.endsWith('Z') ? message.createdAt : message.createdAt + 'Z') 
+    : null;
+  const time = dateStr 
+    ? new Date(dateStr).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) 
     : 'Now';
 
   // Format URL relative to backend
