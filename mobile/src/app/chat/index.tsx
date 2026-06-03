@@ -1,6 +1,6 @@
 // @ts-nocheck
 import React, { useEffect, useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, FlatList, StyleSheet, Image } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, FlatList, StyleSheet, Image, ActivityIndicator } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useRouter } from 'expo-router';
 import api from '../../services/api';
@@ -14,6 +14,7 @@ const ChatList = () => {
   const { user, logout } = useAuth();
   const { onlineUsers, subscribeToNewMessages, connected } = useWebSocket();
   const [chats, setChats] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState('');
   const [showActionSheet, setShowActionSheet] = useState(false);
   const [showPrivateModal, setShowPrivateModal] = useState(false);
@@ -22,6 +23,7 @@ const ChatList = () => {
 
   const fetchChats = () => {
     if (user?.id) {
+      setLoading(true);
       api.get(`/chats/user/${user.id}?_t=${Date.now()}`).then(res => {
         const loadedChats = res.data;
         setChats(loadedChats);
@@ -31,7 +33,10 @@ const ChatList = () => {
             api.post(`/chats/${chat.id}/delivered`, { userId: user.id }).catch((err: any) => console.error(err));
           }
         });
-      }).catch((err: any) => console.error(err));
+      }).catch((err: any) => console.error(err))
+        .finally(() => setLoading(false));
+    } else {
+      setLoading(false);
     }
   };
   
@@ -160,19 +165,25 @@ const ChatList = () => {
         </View>
       </View>
 
-      <FlatList
-        data={filteredChats}
-        keyExtractor={item => item.id.toString()}
-        renderItem={renderItem}
-        contentContainerStyle={styles.listContent}
-        ListEmptyComponent={
-          <View style={styles.emptyContainer}>
-            <Text style={styles.emptyText}>
-              {searchQuery ? 'No chats found.' : 'No chats yet.'}
-            </Text>
-          </View>
-        }
-      />
+      {loading ? (
+        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+          <ActivityIndicator size="large" color="#6366f1" />
+        </View>
+      ) : (
+        <FlatList
+          data={filteredChats}
+          keyExtractor={item => item.id.toString()}
+          renderItem={renderItem}
+          contentContainerStyle={styles.listContent}
+          ListEmptyComponent={
+            <View style={styles.emptyContainer}>
+              <Text style={styles.emptyText}>
+                {searchQuery ? 'No chats found.' : 'No chats yet.'}
+              </Text>
+            </View>
+          }
+        />
+      )}
 
       {/* Action Sheet for New Chat */}
       {showActionSheet && (

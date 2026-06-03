@@ -1,6 +1,6 @@
 // @ts-nocheck
 import React, { useEffect, useState, useRef, useCallback } from 'react';
-import { View, Text, TextInput, TouchableOpacity, FlatList, StyleSheet, KeyboardAvoidingView, Platform, Keyboard, Alert, ActionSheetIOS } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, FlatList, StyleSheet, KeyboardAvoidingView, Platform, Keyboard, Alert, ActionSheetIOS, ActivityIndicator } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useLocalSearchParams, useRouter, useFocusEffect } from 'expo-router';
 import * as ImagePicker from 'expo-image-picker';
@@ -28,6 +28,7 @@ const ChatRoom = () => {
   const [showAttachMenu, setShowAttachMenu] = useState(false);
   const [uploading, setUploading] = useState(false);
   const [showInfo, setShowInfo] = useState(false);
+  const [loading, setLoading] = useState(true);
   
   const typingTimeoutRef = useRef(null);
   const flatListRef = useRef(null);
@@ -35,6 +36,7 @@ const ChatRoom = () => {
   useFocusEffect(
     useCallback(() => {
       if (!user || !user.id) return;
+      setLoading(true);
 
       // Fetch chat details
       api.get(`/chats/user/${user.id}?_t=${Date.now()}`).then(res => {
@@ -54,7 +56,8 @@ const ChatRoom = () => {
         if (messagesRes.data && messagesRes.data.length > 0) {
           api.post(`/chats/${id}/read`, { userId: user.id }).catch((err: any) => console.error(err));
         }
-      }).catch((err: any) => console.error('Failed to load chat data:', err));
+      }).catch((err: any) => console.error('Failed to load chat data:', err))
+        .finally(() => setLoading(false));
     }, [id, user])
   );
 
@@ -267,6 +270,14 @@ const ChatRoom = () => {
     );
   };
 
+  if (loading) {
+    return (
+      <SafeAreaView style={[styles.container, { justifyContent: 'center', alignItems: 'center' }]}>
+        <ActivityIndicator size="large" color="#6366f1" />
+      </SafeAreaView>
+    );
+  }
+
   if (!chat) {
     return <SafeAreaView style={styles.container} />
   }
@@ -296,7 +307,8 @@ const ChatRoom = () => {
 
       <KeyboardAvoidingView 
         style={styles.chatContainer} 
-        behavior={Platform.OS === 'ios' ? 'padding' : undefined}
+        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+        keyboardVerticalOffset={Platform.OS === 'ios' ? 90 : 0}
       >
         <FlatList
           ref={flatListRef}
