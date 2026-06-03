@@ -16,7 +16,7 @@ const getWsUrl = () => {
 };
 
 export const WebSocketProvider = ({ children }) => {
-  const { token, user, isLoading } = useAuth();
+  const { token, user, isLoading, logout } = useAuth();
   const [client, setClient] = useState(null);
   const [connected, setConnected] = useState(false);
   const [onlineUsers, setOnlineUsers] = useState({});
@@ -31,9 +31,14 @@ export const WebSocketProvider = ({ children }) => {
           initialStatus[u.username] = (u.status?.name === 'ONLINE' || u.status === 'ONLINE');
         });
         setOnlineUsers(prev => ({ ...prev, ...initialStatus }));
-      }).catch(err => console.error("Failed to fetch initial user status", err));
+      }).catch(err => {
+        console.error("Failed to fetch initial user status", err);
+        if (err.response && (err.response.status === 401 || err.response.status === 500)) {
+          if (logout) logout();
+        }
+      });
     }
-  }, [token, isLoading]);
+  }, [token, isLoading, logout]);
 
   useEffect(() => {
     if (!token || !user || isLoading) return;
@@ -67,6 +72,9 @@ export const WebSocketProvider = ({ children }) => {
     stompClient.onStompError = frame => {
       console.error('Broker reported error: ' + frame.headers['message']);
       console.error('Additional details: ' + frame.body);
+      if (frame.headers['message'] && frame.headers['message'].includes('Failed to send message to ExecutorSubscribableChannel')) {
+        if (logout) logout();
+      }
     };
 
     stompClient.activate();
@@ -76,7 +84,7 @@ export const WebSocketProvider = ({ children }) => {
       stompClient.deactivate();
       setConnected(false);
     };
-  }, [token, user, isLoading]);
+  }, [token, user, isLoading, logout]);
 
   const subscribeToChat = (chatId, callback) => {
     if (client && connected && !subscriptions.current.has(chatId)) {
