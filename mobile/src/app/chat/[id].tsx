@@ -1,7 +1,7 @@
 // @ts-nocheck
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState, useRef, useCallback } from 'react';
 import { View, Text, TextInput, TouchableOpacity, FlatList, StyleSheet, SafeAreaView, KeyboardAvoidingView, Platform, Keyboard, Alert, ActionSheetIOS } from 'react-native';
-import { useLocalSearchParams, useRouter } from 'expo-router';
+import { useLocalSearchParams, useRouter, useFocusEffect } from 'expo-router';
 import * as ImagePicker from 'expo-image-picker';
 import * as DocumentPicker from 'expo-document-picker';
 import api from '../../services/api';
@@ -31,29 +31,31 @@ const ChatRoom = () => {
   const typingTimeoutRef = useRef(null);
   const flatListRef = useRef(null);
 
-  useEffect(() => {
-    if (!user || !user.id) return;
+  useFocusEffect(
+    useCallback(() => {
+      if (!user || !user.id) return;
 
-    // Fetch chat details
-    api.get(`/chats/user/${user.id}`).then(res => {
-      const currentChat = res.data.find((c: any) => c.id === parseInt(id as string));
-      if (currentChat) setChat(currentChat);
-    });
+      // Fetch chat details
+      api.get(`/chats/user/${user.id}?_t=${Date.now()}`).then(res => {
+        const currentChat = res.data.find((c: any) => c.id === parseInt(id as string));
+        if (currentChat) setChat(currentChat);
+      });
 
-    // Fetch initial messages and statuses
-    Promise.all([
-      api.get(`/chats/${id}/messages`),
-      api.get(`/chats/${id}/member-status`)
-    ]).then(([messagesRes, statusRes]) => {
-      setMessages(Array.isArray(messagesRes.data) ? messagesRes.data : []);
-      setMemberStatuses(Array.isArray(statusRes.data) ? statusRes.data : []);
-      
-      // Mark read
-      if (messagesRes.data && messagesRes.data.length > 0) {
-        api.post(`/chats/${id}/read`, { userId: user.id }).catch((err: any) => console.error(err));
-      }
-    }).catch((err: any) => console.error('Failed to load chat data:', err));
-  }, [id, user]);
+      // Fetch initial messages and statuses
+      Promise.all([
+        api.get(`/chats/${id}/messages?_t=${Date.now()}`),
+        api.get(`/chats/${id}/member-status?_t=${Date.now()}`)
+      ]).then(([messagesRes, statusRes]) => {
+        setMessages(Array.isArray(messagesRes.data) ? messagesRes.data : []);
+        setMemberStatuses(Array.isArray(statusRes.data) ? statusRes.data : []);
+        
+        // Mark read
+        if (messagesRes.data && messagesRes.data.length > 0) {
+          api.post(`/chats/${id}/read`, { userId: user.id }).catch((err: any) => console.error(err));
+        }
+      }).catch((err: any) => console.error('Failed to load chat data:', err));
+    }, [id, user])
+  );
 
   useEffect(() => {
     let subChat: any;

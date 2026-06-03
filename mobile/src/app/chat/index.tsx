@@ -21,7 +21,7 @@ const ChatList = () => {
 
   const fetchChats = () => {
     if (user?.id) {
-      api.get(`/chats/user/${user.id}`).then(res => {
+      api.get(`/chats/user/${user.id}?_t=${Date.now()}`).then(res => {
         const loadedChats = res.data;
         setChats(loadedChats);
         
