@@ -42,11 +42,11 @@ const MessageBubble = ({
           )}
           {message.messageType === 'IMAGE' && message.fileUrl ? (
             <div className="mb-1">
-              <img src={`http://localhost:8080${message.fileUrl}`} alt="attachment" className="max-w-full rounded-lg max-h-64 object-contain bg-black/10 shadow-sm" />
+              <img src={`https://chat-web-1-b3uj.onrender.com${message.fileUrl}`} alt="attachment" className="max-w-full rounded-lg max-h-64 object-contain bg-black/10 shadow-sm" />
             </div>
           ) : message.messageType === 'FILE' && message.fileUrl ? (
             <div className="mb-1">
-              <a href={`http://localhost:8080${message.fileUrl}`} target="_blank" rel="noopener noreferrer" className="flex items-center p-3 bg-black/10 rounded-lg hover:bg-black/20 transition-colors border border-white/10">
+              <a href={`https://chat-web-1-b3uj.onrender.com${message.fileUrl}`} target="_blank" rel="noopener noreferrer" className="flex items-center p-3 bg-black/10 rounded-lg hover:bg-black/20 transition-colors border border-white/10">
                 <svg className="w-8 h-8 mr-3 text-white/80 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z" /></svg>
                 <span className="font-medium text-sm truncate max-w-[200px]">{content || 'Attachment'}</span>
               </a>

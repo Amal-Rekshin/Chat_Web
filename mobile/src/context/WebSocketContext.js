@@ -12,25 +12,7 @@ const WebSocketContext = createContext(undefined);
 
 // Adjust baseURL based on platform for local development
 const getWsUrl = () => {
-  if (__DEV__) {
-    // If running on the web, always use localhost
-    if (Platform.OS === 'web') {
-      return 'ws://localhost:8080/ws';
-    }
-
-    // Dynamically resolve the IP of the machine running Expo Go
-    const hostUri = Constants.expoConfig?.hostUri || Constants.manifest?.hostUri;
-    if (hostUri) {
-      const ipAddress = hostUri.split(':')[0];
-      return `ws://${ipAddress}:8080/ws`;
-    }
-
-    if (Platform.OS === 'android') {
-      return 'ws://10.0.2.2:8080/ws';
-    }
-    return 'ws://localhost:8080/ws';
-  }
-  return 'wss://your-production-url.com/ws';
+  return 'wss://chat-web-1-b3uj.onrender.com/ws';
 };
 
 export const WebSocketProvider = ({ children }) => {

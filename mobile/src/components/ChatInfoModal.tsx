@@ -124,13 +124,7 @@ const ChatInfoModal: React.FC<ChatInfoModalProps> = ({
   const getFullUrl = (url: string) => {
     if (!url) return '';
     if (url.startsWith('http')) return url;
-    const hostUri = Constants.expoConfig?.hostUri || Constants.manifest?.hostUri;
-    let baseUrl = 'http://localhost:8080';
-    if (hostUri) {
-      const ipAddress = hostUri.split(':')[0];
-      baseUrl = `http://${ipAddress}:8080`;
-    }
-    return `${baseUrl}${url}`;
+    return `https://chat-web-1-b3uj.onrender.com${url}`;
   };
 
   return (
