@@ -30,7 +30,8 @@ const Login = () => {
         navigate('/');
       }
     } catch (err) {
-      setError(err.response?.data?.message || 'Invalid credentials');
+      const errorMsg = err.response?.data?.message || err.response?.data?.error || (typeof err.response?.data === 'string' ? err.response?.data : 'Invalid credentials');
+      setError(errorMsg);
     }
   };
 
@@ -71,7 +72,7 @@ const Login = () => {
       <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
         <div className="bg-slate-800 py-8 px-4 shadow-2xl sm:rounded-2xl sm:px-10 border border-slate-700">
           <form className="space-y-6" onSubmit={handleLogin}>
-            {error && <div className="text-red-400 text-sm text-center bg-red-900/30 py-2 rounded-lg">{typeof error === 'object' ? JSON.stringify(error) : error}</div>}
+            {error && <div className="text-red-400 text-sm text-center bg-red-900/30 py-2 rounded-lg">{error}</div>}
             <div>
               <label className="block text-sm font-medium text-slate-300">Username</label>
               <div className="mt-1">

@@ -18,7 +18,8 @@ const Register = () => {
       });
       navigate('/login');
     } catch (err) {
-      setError(err.response?.data || 'Registration failed');
+      const errorMsg = err.response?.data?.message || err.response?.data?.error || (typeof err.response?.data === 'string' ? err.response?.data : 'Registration failed');
+      setError(errorMsg);
     }
   };
   return <div className="min-h-screen bg-slate-900 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
