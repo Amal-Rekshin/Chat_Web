@@ -39,16 +39,21 @@ public class DataInitializer implements CommandLineRunner {
         }
 
         // Initialize Default Users if not present
-        if (userRepository.count() == 0) {
-            Role adminRole = roleRepository.findByName("ADMIN").orElseThrow();
-            Role userRole = roleRepository.findByName("USER").orElseThrow();
-            UserStatus offlineStatus = userStatusRepository.findByName("OFFLINE").orElseThrow();
+        Role adminRole = roleRepository.findByName("ADMIN").orElseThrow();
+        Role userRole = roleRepository.findByName("USER").orElseThrow();
+        UserStatus offlineStatus = userStatusRepository.findByName("OFFLINE").orElseThrow();
 
-            List<User> defaultUsers = Arrays.asList(
-                    User.builder().username("Roriri").fullName("Roriri").email("roriri@example.com").password(passwordEncoder.encode("roriri")).role(adminRole).status(offlineStatus).build()
-            );
+        List<User> defaultUsers = Arrays.asList(
+                User.builder().username("Rekshin").fullName("Rekshin").email("rekshin@example.com").password(passwordEncoder.encode("rekshin")).role(adminRole).status(offlineStatus).build(),
+                User.builder().username("Hari").fullName("Hari").email("hari@example.com").password(passwordEncoder.encode("hari")).role(userRole).status(offlineStatus).build(),
+                User.builder().username("Barani").fullName("Barani").email("barani@example.com").password(passwordEncoder.encode("barani")).role(userRole).status(offlineStatus).build(),
+                User.builder().username("Roriri").fullName("Roriri").email("roriri@example.com").password(passwordEncoder.encode("roriri")).role(userRole).status(offlineStatus).build()
+        );
 
-            userRepository.saveAll(defaultUsers);
+        for (User u : defaultUsers) {
+            if (!userRepository.existsByUsername(u.getUsername())) {
+                userRepository.save(u);
+            }
         }
     }
 }
