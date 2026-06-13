@@ -12,27 +12,27 @@ interface MessageBubbleProps {
   onLongPress?: (msg: any) => void;
 }
 
-const MessageBubble: React.FC<MessageBubbleProps> = ({ 
-  message, 
-  isOwn, 
+const MessageBubble: React.FC<MessageBubbleProps> = ({
+  message,
+  isOwn,
   status = 'SENT',
   onEditRequest,
   onReplyRequest,
   onLongPress
 }) => {
   const content = message.content || '';
-  const dateStr = message.createdAt 
-    ? (message.createdAt.endsWith('Z') ? message.createdAt : message.createdAt + 'Z') 
+  const dateStr = message.createdAt
+    ? (message.createdAt.endsWith('Z') ? message.createdAt : message.createdAt + 'Z')
     : null;
-  const time = dateStr 
-    ? new Date(dateStr).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) 
+  const time = dateStr
+    ? new Date(dateStr).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
     : 'Now';
 
   // Format URL relative to backend
   const getFullUrl = (url: string) => {
     if (!url) return '';
     if (url.startsWith('http')) return url;
-    return `https://chat-web-1-b3uj.onrender.com${url}`;
+    return `http://localhost:8080${url}`;
   };
 
   const handleLinkPress = (url: string) => {
@@ -40,7 +40,7 @@ const MessageBubble: React.FC<MessageBubbleProps> = ({
   };
 
   return (
-    <TouchableOpacity 
+    <TouchableOpacity
       style={[styles.messageRow, isOwn ? styles.messageRowOwn : styles.messageRowOther]}
       onLongPress={() => onLongPress && onLongPress(message)}
       activeOpacity={0.8}
@@ -52,9 +52,9 @@ const MessageBubble: React.FC<MessageBubbleProps> = ({
           </Text>
         </View>
       )}
-      
+
       <View style={[styles.messageBubble, isOwn ? styles.messageBubbleOwn : styles.messageBubbleOther]}>
-        
+
         {/* Reply Context */}
         {message.replyToMessageContent && (
           <View style={[styles.replyContext, isOwn ? styles.replyContextOwn : styles.replyContextOther]}>
@@ -70,16 +70,16 @@ const MessageBubble: React.FC<MessageBubbleProps> = ({
         {/* Media Attachments */}
         {message.messageType === 'IMAGE' && message.fileUrl && (
           <TouchableOpacity onPress={() => handleLinkPress(message.fileUrl)}>
-            <Image 
-              source={{ uri: getFullUrl(message.fileUrl) }} 
-              style={styles.imageAttachment} 
+            <Image
+              source={{ uri: getFullUrl(message.fileUrl) }}
+              style={styles.imageAttachment}
               resizeMode="cover"
             />
           </TouchableOpacity>
         )}
 
         {message.messageType === 'FILE' && message.fileUrl && (
-          <TouchableOpacity 
+          <TouchableOpacity
             style={[styles.fileAttachment, isOwn ? styles.fileAttachmentOwn : styles.fileAttachmentOther]}
             onPress={() => handleLinkPress(message.fileUrl)}
           >
@@ -102,7 +102,7 @@ const MessageBubble: React.FC<MessageBubbleProps> = ({
           <Text style={[styles.messageTime, isOwn ? styles.messageTimeOwn : styles.messageTimeOther]}>
             {time}
           </Text>
-          
+
           {message.isEdited && (
             <Text style={[styles.editedText, isOwn ? styles.editedTextOwn : styles.editedTextOther]}>
               (edited)

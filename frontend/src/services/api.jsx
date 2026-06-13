@@ -1,8 +1,8 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: 'https://chat-web-1-b3uj.onrender.com/api',
-  // baseURL: 'https://chat-web-1-b3uj.onrender.com/api',
+  baseURL: 'http://localhost:8080/api',
+  // baseURL: 'http://localhost:8080/api',
 });
 
 api.interceptors.request.use(

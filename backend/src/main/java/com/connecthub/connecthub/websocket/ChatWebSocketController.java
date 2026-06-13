@@ -62,7 +62,7 @@ public class ChatWebSocketController {
                 .replyToMessage(replyTo)
                 .build();
         
-        message = messageRepository.save(message);
+        message = messageRepository.saveAndFlush(message);
 
         // Handle attachments if any
         if (payload.getFileUrl() != null && !payload.getFileUrl().trim().isEmpty()) {
@@ -71,7 +71,7 @@ public class ChatWebSocketController {
                 .fileUrl(payload.getFileUrl())
                 .fileName(payload.getContent()) // Since we put file name in content
                 .build();
-            attachmentRepository.save(attachment);
+            attachmentRepository.saveAndFlush(attachment);
             message.setAttachments(Collections.singletonList(attachment));
         }
 

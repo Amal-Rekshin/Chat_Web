@@ -36,7 +36,10 @@ public class ChatController {
     @Transactional
     @GetMapping("/{chatId}/messages")
     public ResponseEntity<List<com.connecthub.connecthub.dto.ChatMessagePayload>> getChatMessages(@PathVariable Long chatId) {
+        System.out.println("Fetching messages for chat " + chatId);
         List<Message> messages = messageRepository.findByChatIdOrderByCreatedAtAsc(chatId);
+        System.out.println("Found " + messages.size() + " messages in DB");
+        
         List<com.connecthub.connecthub.dto.ChatMessagePayload> dtos = messages.stream().map(m -> {
             String fileUrl = null;
             if (m.getAttachments() != null && !m.getAttachments().isEmpty()) {
@@ -57,6 +60,8 @@ public class ChatController {
                 m.getReplyToMessage() != null && m.getReplyToMessage().getSender() != null ? m.getReplyToMessage().getSender().getUsername() : null
             );
         }).toList();
+        
+        System.out.println("Returning " + dtos.size() + " message DTOs to frontend");
         return ResponseEntity.ok(dtos);
     }
 

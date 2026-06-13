@@ -60,8 +60,8 @@ const ChatInfoModal: React.FC<ChatInfoModalProps> = ({
       "Are you sure you want to remove this member?",
       [
         { text: "Cancel", style: "cancel" },
-        { 
-          text: "Remove", 
+        {
+          text: "Remove",
           style: "destructive",
           onPress: async () => {
             try {
@@ -83,8 +83,8 @@ const ChatInfoModal: React.FC<ChatInfoModalProps> = ({
       `Are you sure you want to make this user a ${newRole}?`,
       [
         { text: "Cancel", style: "cancel" },
-        { 
-          text: "Confirm", 
+        {
+          text: "Confirm",
           onPress: async () => {
             try {
               await api.put(`/chats/${chat.id}/members/${userId}/role?requesterId=${currentUserId}&role=${newRole}`);
@@ -104,8 +104,8 @@ const ChatInfoModal: React.FC<ChatInfoModalProps> = ({
       "Are you sure you want to permanently delete this group? This action cannot be undone.",
       [
         { text: "Cancel", style: "cancel" },
-        { 
-          text: "Delete", 
+        {
+          text: "Delete",
           style: "destructive",
           onPress: async () => {
             try {
@@ -124,7 +124,7 @@ const ChatInfoModal: React.FC<ChatInfoModalProps> = ({
   const getFullUrl = (url: string) => {
     if (!url) return '';
     if (url.startsWith('http')) return url;
-    return `https://chat-web-1-b3uj.onrender.com${url}`;
+    return `http://localhost:8080${url}`;
   };
 
   return (
@@ -139,7 +139,7 @@ const ChatInfoModal: React.FC<ChatInfoModalProps> = ({
               <X size={20} color="#94a3b8" />
             </TouchableOpacity>
           </View>
-          
+
           {loading ? (
             <View style={styles.center}>
               <ActivityIndicator color="#6366f1" size="large" />
@@ -150,7 +150,7 @@ const ChatInfoModal: React.FC<ChatInfoModalProps> = ({
             </View>
           ) : (
             <ScrollView style={styles.content} showsVerticalScrollIndicator={false}>
-              
+
               {/* Profile Image & Name */}
               <View style={styles.profileSection}>
                 {info.image ? (
@@ -216,7 +216,7 @@ const ChatInfoModal: React.FC<ChatInfoModalProps> = ({
                   </View>
 
                   {isAdmin && (
-                    <TouchableOpacity 
+                    <TouchableOpacity
                       style={styles.addMemberButton}
                       onPress={() => setShowAddMember(true)}
                     >
@@ -244,10 +244,10 @@ const ChatInfoModal: React.FC<ChatInfoModalProps> = ({
                             {onlineUsers[member.username] ? 'Online' : 'Offline'}
                           </Text>
                         </View>
-                        
+
                         {isAdmin && member.userId !== currentUserId && (
                           <View style={styles.memberActions}>
-                            <TouchableOpacity 
+                            <TouchableOpacity
                               style={styles.roleButton}
                               onPress={() => handleUpdateRole(member.userId, member.role)}
                             >
@@ -255,7 +255,7 @@ const ChatInfoModal: React.FC<ChatInfoModalProps> = ({
                                 {member.role === 'ADMIN' ? 'Demote' : 'Make Admin'}
                               </Text>
                             </TouchableOpacity>
-                            <TouchableOpacity 
+                            <TouchableOpacity
                               style={styles.removeMemberButton}
                               onPress={() => handleRemoveMember(member.userId)}
                             >
@@ -281,7 +281,7 @@ const ChatInfoModal: React.FC<ChatInfoModalProps> = ({
                   </View>
 
                   {isAdmin && (
-                    <TouchableOpacity 
+                    <TouchableOpacity
                       style={styles.deleteGroupButton}
                       onPress={handleDeleteGroup}
                     >

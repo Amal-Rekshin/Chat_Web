@@ -242,7 +242,7 @@ public class ChatService {
             Long unreadCount = 0L;
             if (member != null) {
                 Long lastRead = member.getLastReadId() != null ? member.getLastReadId() : 0L;
-                unreadCount = messageRepository.countByChatIdAndIdGreaterThan(chat.getId(), lastRead);
+                unreadCount = messageRepository.countByChatIdAndIdGreaterThanAndSenderIdNot(chat.getId(), lastRead, userId);
             }
             String currentUserRole = member != null && member.getIsAdmin() ? "ADMIN" : "MEMBER";
             
