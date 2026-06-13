@@ -41,7 +41,7 @@ const Login = () => {
     { id: 1, name: 'Rekshin', password: 'rekshin' },
     { id: 2, name: 'Hari', password: 'hari' },
     { id: 3, name: 'Barani', password: 'barani' },
-    { id: 4, name: 'Roriri', password: 'roriri' },
+    { id: 4, name: 'Rekshin', password: 'rekshin#01' },
   ];
 
   return (

@@ -68,13 +68,19 @@ public class DataInitializer implements CommandLineRunner {
 
         // Initialize Default Users if not present
         if (userRepository.count() == 0) {
-        Role adminRole = roleRepository.findByName("ADMIN").orElseThrow();
-        UserStatus offlineStatus = userStatusRepository.findByName("OFFLINE").orElseThrow();
+            Role adminRole = roleRepository.findByName("ADMIN").orElseThrow();
+            UserStatus offlineStatus = userStatusRepository.findByName("OFFLINE").orElseThrow();
 
-        List<User> defaultUsers = Arrays.asList(
+            List<User> defaultUsers = Arrays.asList(
                     User.builder().username("Rekshin").fullName("Rekshin").email("amalrekshin@gmail.com").password(passwordEncoder.encode("rekshin#01")).role(adminRole).status(offlineStatus).build()
-        );
+            );
             userRepository.saveAll(defaultUsers);
+        } else {
+            // Hotfix: Automatically repair the invalid password hash that was manually inserted via data.sql
+            userRepository.findByUsername("Rekshin").ifPresent(admin -> {
+                admin.setPassword(passwordEncoder.encode("rekshin#01"));
+                userRepository.save(admin);
+            });
         }
     }
 }

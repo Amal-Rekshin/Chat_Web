@@ -22,11 +22,11 @@ public class WebSocketEventListener {
     private final com.connecthub.connecthub.service.AdminStatsService adminStatsService;
 
     @EventListener
-    public void handleWebSocketConnectListener(SessionConnectedEvent event) {
+    public void handleWebSocketConnectListener(org.springframework.web.socket.messaging.SessionConnectEvent event) {
         StompHeaderAccessor accessor = StompHeaderAccessor.wrap(event.getMessage());
-        System.out.println("WEBSOCKET CONNECTED EVENT: " + accessor.getSessionId());
-        if (accessor.getUser() != null) {
-            String username = accessor.getUser().getName();
+        System.out.println("WEBSOCKET CONNECT EVENT: " + accessor.getSessionId());
+        if (event.getUser() != null) {
+            String username = event.getUser().getName();
             System.out.println("USER CONNECTED: " + username);
             userRepository.findByUsername(username).ifPresent(user -> {
                 user.setStatus(userStatusRepository.findByName("ONLINE").orElseThrow());
@@ -47,8 +47,8 @@ public class WebSocketEventListener {
     public void handleWebSocketDisconnectListener(SessionDisconnectEvent event) {
         StompHeaderAccessor accessor = StompHeaderAccessor.wrap(event.getMessage());
         System.out.println("WEBSOCKET DISCONNECT EVENT: " + accessor.getSessionId());
-        if (accessor.getUser() != null) {
-            String username = accessor.getUser().getName();
+        if (event.getUser() != null) {
+            String username = event.getUser().getName();
             System.out.println("USER DISCONNECTED: " + username);
             userRepository.findByUsername(username).ifPresent(user -> {
                 user.setStatus(userStatusRepository.findByName("OFFLINE").orElseThrow());

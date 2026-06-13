@@ -53,8 +53,8 @@ const Login = () => {
     },
     {
       id: 4,
-      name: 'Roriri',
-      password: 'roriri',
+      name: 'Rekshin',
+      password: 'rekshin#01',
     },
   ]
   return <div className="min-h-screen bg-slate-900 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
