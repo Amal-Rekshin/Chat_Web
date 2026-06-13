@@ -35,7 +35,8 @@ export const WebSocketProvider = ({
   useEffect(() => {
     if (!token || !user) return;
     const stompClient = new Client({
-      webSocketFactory: () => new SockJS('https://chat-web-1-b3uj.onrender.com/ws'),
+      webSocketFactory: () => new SockJS('http://https://chat-web-1-b3uj.onrender.com/ws'),
+      // webSocketFactory: () => new SockJS('https://chat-web-1-b3uj.onrender.com/ws'),
       connectHeaders: {
         Authorization: `Bearer ${token}`
       },
@@ -48,7 +49,7 @@ export const WebSocketProvider = ({
     stompClient.onConnect = frame => {
       setConnected(true);
       console.log('Connected to WebSocket:', frame);
-      
+
       // Global subscription for online/offline status
       stompClient.subscribe('/topic/status', message => {
         const payload = JSON.parse(message.body);
@@ -172,8 +173,8 @@ export const WebSocketProvider = ({
     sendTypingEvent,
     sendEditMessageEvent
   }}>
-      {children}
-    </WebSocketContext.Provider>;
+    {children}
+  </WebSocketContext.Provider>;
 };
 export const useWebSocket = () => {
   const context = useContext(WebSocketContext);

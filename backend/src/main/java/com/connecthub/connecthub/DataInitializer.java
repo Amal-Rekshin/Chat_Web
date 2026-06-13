@@ -1,8 +1,12 @@
 package com.connecthub.connecthub;
 
+import com.connecthub.connecthub.entity.ChatType;
+import com.connecthub.connecthub.entity.MessageType;
 import com.connecthub.connecthub.entity.Role;
 import com.connecthub.connecthub.entity.User;
 import com.connecthub.connecthub.entity.UserStatus;
+import com.connecthub.connecthub.repository.ChatTypeRepository;
+import com.connecthub.connecthub.repository.MessageTypeRepository;
 import com.connecthub.connecthub.repository.RoleRepository;
 import com.connecthub.connecthub.repository.UserRepository;
 import com.connecthub.connecthub.repository.UserStatusRepository;
@@ -22,6 +26,8 @@ public class DataInitializer implements CommandLineRunner {
     private final UserStatusRepository userStatusRepository;
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
+    private final ChatTypeRepository chatTypeRepository;
+    private final MessageTypeRepository messageTypeRepository;
 
     @Override
     public void run(String... args) throws Exception {
@@ -36,6 +42,28 @@ public class DataInitializer implements CommandLineRunner {
             userStatusRepository.save(UserStatus.builder().name("ONLINE").build());
             userStatusRepository.save(UserStatus.builder().name("OFFLINE").build());
             userStatusRepository.save(UserStatus.builder().name("AWAY").build());
+        }
+
+        // Initialize Chat Types
+        if (chatTypeRepository.findByName("GROUP").isEmpty()) {
+            chatTypeRepository.save(ChatType.builder().name("GROUP").build());
+        }
+        if (chatTypeRepository.findByName("PRIVATE").isEmpty()) {
+            chatTypeRepository.save(ChatType.builder().name("PRIVATE").build());
+        }
+        if (chatTypeRepository.findByName("ANNOUNCEMENT").isEmpty()) {
+            chatTypeRepository.save(ChatType.builder().name("ANNOUNCEMENT").build());
+        }
+
+        // Initialize Message Types
+        if (messageTypeRepository.findByName("TEXT").isEmpty()) {
+            messageTypeRepository.save(MessageType.builder().name("TEXT").build());
+        }
+        if (messageTypeRepository.findByName("IMAGE").isEmpty()) {
+            messageTypeRepository.save(MessageType.builder().name("IMAGE").build());
+        }
+        if (messageTypeRepository.findByName("FILE").isEmpty()) {
+            messageTypeRepository.save(MessageType.builder().name("FILE").build());
         }
 
         // Initialize Default Users if not present

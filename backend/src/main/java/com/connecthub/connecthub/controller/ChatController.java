@@ -11,6 +11,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import java.util.List;
 import java.util.Map;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.connecthub.connecthub.dto.CreateGroupRequest;
 import com.connecthub.connecthub.service.ChatService;
@@ -32,6 +33,7 @@ public class ChatController {
         return ResponseEntity.ok(chatService.getUserChats(userId));
     }
 
+    @Transactional
     @GetMapping("/{chatId}/messages")
     public ResponseEntity<List<com.connecthub.connecthub.dto.ChatMessagePayload>> getChatMessages(@PathVariable Long chatId) {
         List<Message> messages = messageRepository.findByChatIdOrderByCreatedAtAsc(chatId);
@@ -43,16 +45,16 @@ public class ChatController {
             return new com.connecthub.connecthub.dto.ChatMessagePayload(
                 m.getId(),
                 chatId,
-                m.getSender().getId(),
+                m.getSender() != null ? m.getSender().getId() : null,
                 m.getContent(),
-                m.getMessageType().getName(),
+                m.getMessageType() != null ? m.getMessageType().getName() : "TEXT",
                 fileUrl,
                 m.getCreatedAt(),
-                m.getSender().getUsername(),
+                m.getSender() != null ? m.getSender().getUsername() : "Unknown",
                 m.getIsEdited(),
                 m.getReplyToMessage() != null ? m.getReplyToMessage().getId() : null,
                 m.getReplyToMessage() != null ? m.getReplyToMessage().getContent() : null,
-                m.getReplyToMessage() != null ? m.getReplyToMessage().getSender().getUsername() : null
+                m.getReplyToMessage() != null && m.getReplyToMessage().getSender() != null ? m.getReplyToMessage().getSender().getUsername() : null
             );
         }).toList();
         return ResponseEntity.ok(dtos);

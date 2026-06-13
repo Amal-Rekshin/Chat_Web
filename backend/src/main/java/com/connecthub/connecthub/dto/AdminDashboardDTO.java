@@ -15,7 +15,8 @@ public class AdminDashboardDTO {
     private long totalMessages;
     private long onlineUsers; // To be implemented with websocket presence
     private java.util.List<TrendData> activityTrends;
-    
+
+
     @Data
     @Builder
     @NoArgsConstructor

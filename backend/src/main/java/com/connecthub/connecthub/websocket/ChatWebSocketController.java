@@ -87,6 +87,7 @@ public class ChatWebSocketController {
         payload.setId(message.getId());
         payload.setCreatedAt(message.getCreatedAt());
         payload.setSenderName(message.getSender().getUsername());
+        payload.setMessageType(type.getName());
         payload.setIsEdited(message.getIsEdited());
         if (message.getReplyToMessage() != null) {
             payload.setReplyToMessageId(message.getReplyToMessage().getId());
