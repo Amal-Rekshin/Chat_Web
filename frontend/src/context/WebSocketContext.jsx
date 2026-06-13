@@ -35,7 +35,7 @@ export const WebSocketProvider = ({
   useEffect(() => {
     if (!token || !user) return;
     const stompClient = new Client({
-      webSocketFactory: () => new SockJS('http://https://chat-web-1-b3uj.onrender.com/ws'),
+      webSocketFactory: () => new SockJS('https://chat-web-1-b3uj.onrender.com/ws'),
       // webSocketFactory: () => new SockJS('https://chat-web-1-b3uj.onrender.com/ws'),
       connectHeaders: {
         Authorization: `Bearer ${token}`
