@@ -5,7 +5,7 @@ import Constants from 'expo-constants';
 
 // Adjust baseURL based on platform for local development
 const getBaseUrl = () => {
-  return 'http://localhost:8080/api';
+  return 'https://chat-web-1-b3uj.onrender.com/api';
 };
 
 const api = axios.create({

@@ -32,7 +32,7 @@ const MessageBubble: React.FC<MessageBubbleProps> = ({
   const getFullUrl = (url: string) => {
     if (!url) return '';
     if (url.startsWith('http')) return url;
-    return `http://localhost:8080${url}`;
+    return `https://chat-web-1-b3uj.onrender.com${url}`;
   };
 
   const handleLinkPress = (url: string) => {
