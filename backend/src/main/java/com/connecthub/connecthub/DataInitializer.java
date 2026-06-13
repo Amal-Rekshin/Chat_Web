@@ -69,13 +69,11 @@ public class DataInitializer implements CommandLineRunner {
         // Initialize Default Users if not present
         if (userRepository.count() == 0) {
         Role adminRole = roleRepository.findByName("ADMIN").orElseThrow();
-        Role userRole = roleRepository.findByName("USER").orElseThrow();
         UserStatus offlineStatus = userStatusRepository.findByName("OFFLINE").orElseThrow();
 
         List<User> defaultUsers = Arrays.asList(
-                    User.builder().username("Roriri").fullName("Roriri").email("roriri@example.com").password(passwordEncoder.encode("roriri")).role(adminRole).status(offlineStatus).build()
+                    User.builder().username("Rekshin").fullName("Rekshin").email("amalrekshin@gmail.com").password(passwordEncoder.encode("rekshin#01")).role(adminRole).status(offlineStatus).build()
         );
-
             userRepository.saveAll(defaultUsers);
         }
     }
